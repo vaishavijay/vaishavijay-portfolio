@@ -1,0 +1,1487 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vaishavi Jay · Flowmersion TPM</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --white: #ffffff;
+        --off: #f8f7f5;
+        --border: #e8e6e1;
+        --muted: #a8a39b;
+        --mid: #6b6560;
+        --body: #2a2520;
+        --ink: #111109;
+        --accent: #5c7052;
+        --gold: #a9884f;
+        --dark: #0f1117;
+        --serif: "Space Grotesk", system-ui, sans-serif;
+        --sans: "Inter", system-ui, sans-serif;
+        --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+        --ease: cubic-bezier(0.16, 1, 0.3, 1);
+        --w: 720px;
+        --gx: clamp(1.5rem, 5vw, 4rem);
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background: var(--white);
+        color: var(--body);
+        font-family: var(--sans);
+        font-size: 16px;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        padding: 1.25rem var(--gx);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(14px);
+        border-bottom: 1px solid var(--border);
+      }
+
+      .n-logo {
+        font-family: var(--serif);
+        font-size: 1rem;
+        color: var(--ink);
+      }
+
+      .n-back {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        font-size: 0.8rem;
+        color: var(--mid);
+        transition: color 0.2s;
+      }
+
+      .n-back:hover {
+        color: var(--ink);
+      }
+
+      .hero {
+        max-width: calc(var(--w) + var(--gx) * 2);
+        margin: 0 auto;
+        padding: 6.5rem var(--gx) 2.5rem;
+      }
+
+      .owner-strip {
+        display: flex;
+        align-items: center;
+        gap: 0.65rem;
+        flex-wrap: wrap;
+        margin-bottom: 1.1rem;
+      }
+
+      .owner-badge {
+        font-family: var(--mono);
+        font-size: 0.62rem;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+        padding: 0.3rem 0.7rem;
+        border-radius: 3px;
+      }
+
+      .ob-tpm {
+        background: rgba(92, 112, 82, 0.1);
+        color: var(--accent);
+        border: 1px solid rgba(92, 112, 82, 0.25);
+      }
+
+      .ob-xr {
+        background: rgba(100, 140, 220, 0.08);
+        color: #3a5ea0;
+        border: 1px solid rgba(100, 140, 220, 0.2);
+      }
+
+      .ob-zero {
+        background: rgba(15, 17, 23, 0.06);
+        color: var(--body);
+        border: 1px solid var(--border);
+      }
+
+      .hero-title {
+        font-family: var(--serif);
+        font-size: clamp(2.4rem, 5.5vw, 4rem);
+        font-weight: 400;
+        color: var(--ink);
+        line-height: 1.04;
+        letter-spacing: -0.03em;
+        margin-bottom: 1.25rem;
+      }
+
+      .hero-title em {
+        font-style: normal;
+        color: var(--accent);
+      }
+
+      .hero-lede {
+        font-size: 1rem;
+        color: var(--mid);
+        line-height: 1.8;
+        margin-bottom: 2rem;
+      }
+
+      .hero-lede strong {
+        color: var(--body);
+        font-weight: 500;
+      }
+
+      /* Product visual,dark */
+      .product-visual {
+        background: #0b1420;
+        border-radius: 10px;
+        overflow: hidden;
+        margin-bottom: 2rem;
+      }
+
+      .pv-nav {
+        display: flex;
+        gap: 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        padding: 0.85rem 2rem;
+      }
+
+      .pv-nav-item {
+        font-family: var(--mono);
+        font-size: 0.62rem;
+        color: rgba(255, 255, 255, 0.3);
+        letter-spacing: 0.06em;
+        margin-right: 2rem;
+        padding-bottom: 0.4rem;
+      }
+
+      .pv-nav-item.active {
+        color: rgba(255, 255, 255, 0.7);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+      }
+
+      .pv-top {
+        padding: 1.75rem 2rem 0;
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 2rem;
+      }
+
+      .pv-brand {
+        font-family: var(--serif);
+        font-size: 1.75rem;
+        color: rgba(220, 230, 245, 0.9);
+        letter-spacing: -0.02em;
+        line-height: 1;
+      }
+
+      .pv-brand span {
+        font-style: italic;
+        color: rgba(180, 200, 235, 0.65);
+      }
+
+      .pv-tagline {
+        font-family: var(--mono);
+        font-size: 0.6rem;
+        color: rgba(150, 175, 210, 0.5);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        line-height: 1.5;
+        text-align: right;
+        padding-top: 0.35rem;
+      }
+
+      .pv-metrics {
+        padding: 1.75rem 2rem;
+        display: flex;
+        gap: 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+        margin-top: 1.75rem;
+      }
+
+      .pv-metric {
+        flex: 1;
+        padding-right: 2rem;
+        margin-right: 2rem;
+        border-right: 1px solid rgba(255, 255, 255, 0.06);
+      }
+
+      .pv-metric:last-child {
+        border-right: none;
+        padding-right: 0;
+        margin-right: 0;
+      }
+
+      .pv-metric-val {
+        font-family: var(--serif);
+        font-size: 2.25rem;
+        color: rgba(220, 235, 255, 0.85);
+        font-weight: 400;
+        line-height: 1;
+        letter-spacing: -0.03em;
+        margin-bottom: 0.3rem;
+      }
+
+      .pv-metric-label {
+        font-family: var(--mono);
+        font-size: 0.6rem;
+        color: rgba(150, 175, 210, 0.5);
+        letter-spacing: 0.06em;
+      }
+
+      .impact-strip {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1px;
+        background: var(--border);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        overflow: hidden;
+        margin-bottom: 2rem;
+      }
+
+      .impact-cell {
+        background: var(--white);
+        padding: 1.5rem 1.25rem;
+      }
+
+      .impact-val {
+        font-family: var(--serif);
+        font-size: 2.6rem;
+        font-weight: 400;
+        color: var(--ink);
+        line-height: 1;
+        letter-spacing: -0.03em;
+        margin-bottom: 0.3rem;
+      }
+
+      .impact-label {
+        font-size: 0.78rem;
+        color: var(--mid);
+        line-height: 1.4;
+      }
+
+      .meta-strip {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        border-top: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+        margin-bottom: 3rem;
+      }
+
+      .meta-item {
+        padding: 1rem 0;
+        border-right: 1px solid var(--border);
+        padding-right: 1.5rem;
+        margin-right: 1.5rem;
+      }
+
+      .meta-item:last-child {
+        border-right: none;
+        padding-right: 0;
+        margin-right: 0;
+      }
+
+      .meta-label {
+        font-family: var(--mono);
+        font-size: 0.56rem;
+        color: var(--muted);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-bottom: 0.35rem;
+      }
+
+      .meta-val {
+        font-size: 0.82rem;
+        color: var(--body);
+        line-height: 1.4;
+      }
+
+      /* Product system diagram */
+      .system-wrap {
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        overflow: hidden;
+        margin-bottom: 3rem;
+      }
+
+      .system-header {
+        background: var(--off);
+        padding: 1rem 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .system-header-label {
+        font-family: var(--mono);
+        font-size: 0.58rem;
+        color: var(--muted);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .system-chips {
+        display: flex;
+        gap: 0.4rem;
+      }
+
+      .system-chip {
+        font-family: var(--mono);
+        font-size: 0.55rem;
+        color: var(--mid);
+        border: 1px solid var(--border);
+        padding: 0.15rem 0.45rem;
+        border-radius: 3px;
+        background: var(--white);
+      }
+
+      .system-svg-wrap {
+        padding: 1.5rem;
+        overflow-x: auto;
+      }
+
+      .body-wrap {
+        max-width: calc(var(--w) + var(--gx) * 2);
+        margin: 0 auto;
+        padding: 0 var(--gx) 5rem;
+      }
+
+      .cs-sec {
+        margin-bottom: 2.75rem;
+      }
+
+      .cs-sec-label {
+        font-family: var(--mono);
+        font-size: 0.62rem;
+        color: var(--accent);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        margin-bottom: 0.65rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .cs-sec-label::before {
+        content: "";
+        width: 14px;
+        height: 1px;
+        background: var(--gold);
+      }
+
+      .cs-h2 {
+        font-family: var(--serif);
+        font-size: clamp(1.3rem, 2.5vw, 1.75rem);
+        font-weight: 400;
+        color: var(--ink);
+        letter-spacing: -0.02em;
+        line-height: 1.2;
+        margin-bottom: 1rem;
+      }
+
+      .cs-p {
+        font-size: 0.95rem;
+        color: var(--mid);
+        line-height: 1.8;
+        margin-bottom: 0.85rem;
+      }
+
+      .cs-p:last-child {
+        margin-bottom: 0;
+      }
+
+      .cs-p strong {
+        color: var(--body);
+        font-weight: 500;
+      }
+
+      .cs-hr {
+        height: 1px;
+        background: var(--border);
+        margin: 2.75rem 0;
+      }
+
+      .decision {
+        border-left: 2px solid var(--border);
+        padding: 1rem 1.25rem;
+        background: var(--off);
+        border-radius: 0 4px 4px 0;
+        margin: 1.25rem 0;
+        transition: border-left-color 0.2s;
+      }
+
+      .decision:hover {
+        border-left-color: var(--accent);
+      }
+
+      .decision-label {
+        font-family: var(--mono);
+        font-size: 0.58rem;
+        color: var(--accent);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-bottom: 0.35rem;
+      }
+
+      .decision-text {
+        font-size: 0.875rem;
+        color: var(--body);
+        line-height: 1.65;
+      }
+
+      .decision-text strong {
+        font-weight: 500;
+      }
+
+      .steps {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .step {
+        display: grid;
+        grid-template-columns: 2.5rem 1fr;
+        gap: 0.75rem;
+        padding: 1.1rem 0;
+        border-top: 1px solid var(--border);
+      }
+
+      .step:last-child {
+        border-bottom: 1px solid var(--border);
+      }
+
+      .step-num {
+        font-family: var(--mono);
+        font-size: 0.6rem;
+        color: var(--muted);
+        padding-top: 0.2rem;
+      }
+
+      .step-title {
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--ink);
+        margin-bottom: 0.3rem;
+      }
+
+      .step-body {
+        font-size: 0.875rem;
+        color: var(--mid);
+        line-height: 1.65;
+      }
+
+      .step-body strong {
+        color: var(--body);
+        font-weight: 500;
+      }
+
+      .ba-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1px;
+        background: var(--border);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        overflow: hidden;
+        margin: 1.5rem 0;
+      }
+
+      .ba-col {
+        background: var(--white);
+        padding: 1.5rem;
+      }
+
+      .ba-label {
+        font-family: var(--mono);
+        font-size: 0.6rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-bottom: 1rem;
+        padding-bottom: 0.65rem;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .ba-label.before {
+        color: var(--muted);
+      }
+
+      .ba-label.after {
+        color: var(--accent);
+      }
+
+      .ba-list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 0.55rem;
+      }
+
+      .ba-list li {
+        font-size: 0.85rem;
+        color: var(--mid);
+        line-height: 1.55;
+        position: relative;
+        padding-left: 1rem;
+      }
+
+      .ba-list li::before {
+        position: absolute;
+        left: 0;
+        top: 0.05em;
+        font-size: 0.75rem;
+      }
+
+      .ba-list.before li::before {
+        content: "–";
+        color: var(--muted);
+      }
+
+      .ba-list.after li::before {
+        content: "→";
+        color: var(--accent);
+      }
+
+      /* Execution phases */
+      .phases {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1px;
+        background: var(--border);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        overflow: hidden;
+        margin: 1.5rem 0;
+      }
+
+      .phase {
+        background: var(--off);
+        padding: 1.25rem 1rem;
+      }
+
+      .phase-label {
+        font-family: var(--mono);
+        font-size: 0.56rem;
+        color: var(--muted);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-bottom: 0.5rem;
+      }
+
+      .phase-title {
+        font-size: 0.82rem;
+        font-weight: 500;
+        color: var(--ink);
+        margin-bottom: 0.4rem;
+      }
+
+      .phase-body {
+        font-size: 0.78rem;
+        color: var(--mid);
+        line-height: 1.55;
+      }
+
+      .next-bar {
+        border-top: 1px solid var(--border);
+        max-width: calc(var(--w) + var(--gx) * 2);
+        margin: 0 auto;
+        padding: 2.5rem var(--gx);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 2rem;
+      }
+
+      .next-label {
+        font-family: var(--mono);
+        font-size: 0.6rem;
+        color: var(--muted);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-bottom: 0.4rem;
+      }
+
+      .next-title {
+        font-family: var(--serif);
+        font-size: 1.35rem;
+        color: var(--ink);
+        letter-spacing: -0.015em;
+      }
+
+      .next-arrow {
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        border: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--mid);
+        flex-shrink: 0;
+        transition:
+          background 0.2s,
+          border-color 0.2s,
+          color 0.2s,
+          transform 0.25s var(--ease);
+      }
+
+      .next-arrow:hover {
+        background: var(--ink);
+        border-color: var(--ink);
+        color: var(--white);
+        transform: rotate(45deg);
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(16px);
+        transition:
+          opacity 0.65s var(--ease),
+          transform 0.65s var(--ease);
+      }
+
+      .reveal.in {
+        opacity: 1;
+        transform: none;
+      }
+
+      .d1 {
+        transition-delay: 0.1s;
+      }
+
+      .d2 {
+        transition-delay: 0.2s;
+      }
+
+      .d3 {
+        transition-delay: 0.3s;
+      }
+
+      @media (max-width: 680px) {
+        .impact-strip {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        .impact-cell:last-child {
+          grid-column: 1/-1;
+          border-top: 1px solid var(--border);
+        }
+
+        .meta-strip {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        .meta-item {
+          border-bottom: 1px solid var(--border);
+          padding: 0.85rem 0;
+          border-right: none;
+          margin-right: 0;
+        }
+
+        .meta-item:nth-child(odd) {
+          padding-right: 1rem;
+          border-right: 1px solid var(--border);
+        }
+
+        .ba-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .pv-metrics {
+          flex-direction: column;
+          gap: 1rem;
+        }
+
+        .phases {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <nav>
+      <a href="home.html" class="n-logo">Vaishavi Jay</a>
+      <a href="home.html#" class="n-back">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path
+            d="M13 7H1M6.5 2L2 7l4.5 5"
+            stroke="currentColor"
+            stroke-width="1.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+        All Work
+      </a>
+    </nav>
+
+    <div class="hero">
+      <div class="owner-strip reveal">
+        <span class="owner-badge ob-tpm">Technical PM · 0 → 1</span>
+        <span class="owner-badge ob-xr">XR · Mobile · Consumer</span>
+        <span class="owner-badge ob-zero">Scoped · Shipped · Measured</span>
+      </div>
+
+      <h1 class="hero-title reveal d1">
+        Flowmersion:<br /><em>Technical Product Lead,</em><br />Zero to Live
+        Users
+      </h1>
+      <p class="hero-lede reveal d2">
+        Technical product lead on a pre-launch XR snowsports startup. Owned the
+        product lifecycle: scoping the onboarding system, coordinating
+        engineering, shipping the conversion funnel, and measuring the results.
+        It went from a broken signup flow to a live, instrumented funnel.
+      </p>
+
+      <!-- Product visual -->
+      <div class="product-visual reveal d2">
+        <div class="pv-nav">
+          <div class="pv-nav-item active">SmartRide Dashboard</div>
+          <div class="pv-nav-item">Onboarding</div>
+          <div class="pv-nav-item">Analytics</div>
+        </div>
+        <div class="pv-top">
+          <div>
+            <div class="pv-brand">Flow<span>mersion</span></div>
+            <div
+              style="
+                font-family: var(--mono);
+                font-size: 0.6rem;
+                color: rgba(150, 175, 210, 0.4);
+                letter-spacing: 0.08em;
+                margin-top: 0.35rem;
+              "
+            >
+              XR SNOWSPORTS · MOTION INTELLIGENCE PLATFORM
+            </div>
+          </div>
+          <div class="pv-tagline">
+            PRODUCT STATUS<br />LIVE · WAITLIST OPEN<br />SMARTRIDE V1 DEPLOYED
+          </div>
+        </div>
+        <div class="pv-metrics">
+          <div class="pv-metric">
+            <div class="pv-metric-val">−30%</div>
+            <div class="pv-metric-label">signup friction</div>
+          </div>
+          <div class="pv-metric">
+            <div class="pv-metric-val">+40%</div>
+            <div class="pv-metric-label">flow completion</div>
+          </div>
+          <div class="pv-metric">
+            <div class="pv-metric-val">+35%</div>
+            <div class="pv-metric-label">demo conversions</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="impact-strip reveal d2">
+        <div class="impact-cell">
+          <div class="impact-val">−30%</div>
+          <div class="impact-label">Signup friction reduced</div>
+        </div>
+        <div class="impact-cell">
+          <div class="impact-val">+40%</div>
+          <div class="impact-label">Onboarding flow completion</div>
+        </div>
+        <div class="impact-cell">
+          <div class="impact-val">+35%</div>
+          <div class="impact-label">Demo and waitlist conversions</div>
+        </div>
+      </div>
+
+      <div class="meta-strip reveal d3">
+        <div class="meta-item">
+          <div class="meta-label">Role</div>
+          <div class="meta-val">Technical PM &amp; Dev Lead</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Timeline</div>
+          <div class="meta-val">2024</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Organization</div>
+          <div class="meta-val">Flowmersion · Remote</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Type</div>
+          <div class="meta-val">0→1 · Consumer · Mobile-first · XR</div>
+        </div>
+      </div>
+
+      <!-- Product system diagram -->
+      <div class="system-wrap reveal">
+        <div class="system-header">
+          <div class="system-header-label">
+            Product System · What I scoped and owned
+          </div>
+          <div class="system-chips">
+            <span class="system-chip">Roadmapping</span>
+            <span class="system-chip">Sprint Execution</span>
+            <span class="system-chip">Funnel Design</span>
+          </div>
+        </div>
+        <div class="system-svg-wrap">
+          <svg
+            viewBox="0 0 640 220"
+            xmlns="http://www.w3.org/2000/svg"
+            style="
+              width: 100%;
+              max-width: 640px;
+              display: block;
+              font-family: &quot;DM Mono&quot;, monospace;
+            "
+          >
+            <!-- Funnel stages -->
+            <text
+              x="320"
+              y="18"
+              font-size="7.5"
+              fill="#A8A39B"
+              text-anchor="middle"
+              font-family="'DM Mono',monospace"
+              letter-spacing=".08em"
+            >
+              PRODUCT FUNNEL · OWNED END TO END
+            </text>
+
+            <!-- Stage 1: Discovery -->
+            <rect
+              x="20"
+              y="28"
+              width="130"
+              height="56"
+              rx="5"
+              fill="#F8F7F5"
+              stroke="#E8E6E1"
+              stroke-width="1"
+            />
+            <text
+              x="85"
+              y="48"
+              font-size="8.5"
+              fill="#6B6560"
+              text-anchor="middle"
+              font-family="'DM Mono',monospace"
+            >
+              Landing Page
+            </text>
+            <text
+              x="85"
+              y="62"
+              font-size="7"
+              fill="#A8A39B"
+              text-anchor="middle"
+              font-family="'DM Mono',monospace"
+            >
+              single primary CTA
+            </text>
+            <text
+              x="85"
+              y="74"
+              font-size="7"
+              fill="#4A6741"
+              text-anchor="middle"
+              font-family="'DM Mono',monospace"
+            >
+              → join waitlist only
+            </text>
+
+            <!-- Arrow -->
+            <line
+              x1="150"
+              y1="56"
+              x2="172"
+              y2="56"
+              stroke="#E8E6E1"
+              stroke-width="1.5"
+            />
+            <polygon points="172,52 180,56 172,60" fill="#E8E6E1" />
+
+            <!-- Stage 2: Signup -->
+            <rect
+              x="180"
+              y="28"
+              width="130"
+              height="56"
+              rx="5"
+              fill="#EBF5EB"
+              stroke="#B8D9B8"
+              stroke-width="1"
+            />
+            <text
+              x="245"
+              y="48"
+              font-size="8.5"
+              fill="#2D6B2D"
+              text-anchor="middle"
+              font-family="'DM Mono',monospace"
+            >
+              Signup Flow
+            </text>
+            <text
+              x="245"
+              y="62"
+              font-size="7"
+              fill="#4A6741"
+              text-anchor="middle"
+              font-family="'DM Mono',monospace"
+            >
+              2-field form only
+            </text>
+            <text
+              x="245"
+              y="74"
+              font-size="7"
+              fill="#4A6741"
+              text-anchor="middle"
+              font-family="'DM Mono',monospace"
+            >
+              email + riding level
+            </text>
+
+            <!-- Arrow -->
+            <line
+              x1="310"
+              y1="56"
+              x2="332"
+              y2="56"
+              stroke="#B8D9B8"
+              stroke-width="1.5"
+            />
+            <polygon points="332,52 340,56 332,60" fill="#B8D9B8" />
+
+            <!-- Stage 3: Demo -->
+            <rect
+              x="340"
+              y="28"
+              width="130"
+              height="56"
+              rx="5"
+              fill="#111109"
+              stroke="rgba(92, 112, 82,.4)"
+              stroke-width="1"
+            />
+            <text
+              x="405"
+              y="48"
+              font-size="8.5"
+              fill="rgba(255,255,255,.75)"
+              text-anchor="middle"
+              font-family="'DM Mono',monospace"
+            >
+              SmartRide Demo
+            </text>
+            <text
+              x="405"
+              y="62"
+              font-size="7"
+              fill="rgba(255,255,255,.35)"
+              text-anchor="middle"
+              font-family="'DM Mono',monospace"
+            >
+              in onboarding path
+            </text>
+            <text
+              x="405"
+              y="74"
+              font-size="7"
+              fill="rgba(92, 112, 82,.7)"
+              text-anchor="middle"
+              font-family="'DM Mono',monospace"
+            >
+              not behind nav
+            </text>
+
+            <!-- Arrow -->
+            <line
+              x1="470"
+              y1="56"
+              x2="492"
+              y2="56"
+              stroke="rgba(92, 112, 82,.4)"
+              stroke-width="1.5"
+            />
+            <polygon
+              points="492,52 500,56 492,60"
+              fill="rgba(92, 112, 82,.4)"
+            />
+
+            <!-- Stage 4: Community -->
+            <rect
+              x="500"
+              y="28"
+              width="120"
+              height="56"
+              rx="5"
+              fill="#EBF5EB"
+              stroke="#B8D9B8"
+              stroke-width="1"
+            />
+            <text
+              x="560"
+              y="48"
+              font-size="8.5"
+              fill="#2D6B2D"
+              text-anchor="middle"
+              font-family="'DM Mono',monospace"
+            >
+              Confirmation
+            </text>
+            <text
+              x="560"
+              y="62"
+              font-size="7"
+              fill="#4A6741"
+              text-anchor="middle"
+              font-family="'DM Mono',monospace"
+            >
+              → community invite
+            </text>
+            <text
+              x="560"
+              y="74"
+              font-size="7"
+              fill="#4A6741"
+              text-anchor="middle"
+              font-family="'DM Mono',monospace"
+            >
+              not a dead end
+            </text>
+
+            <!-- What I owned labels -->
+            <text
+              x="85"
+              y="106"
+              font-size="7"
+              fill="#A8A39B"
+              text-anchor="middle"
+              font-family="'DM Mono',monospace"
+            >
+              ROADMAPPING
+            </text>
+            <text
+              x="245"
+              y="106"
+              font-size="7"
+              fill="#A8A39B"
+              text-anchor="middle"
+              font-family="'DM Mono',monospace"
+            >
+              ENGINEERING DIRECTION
+            </text>
+            <text
+              x="405"
+              y="106"
+              font-size="7"
+              fill="#A8A39B"
+              text-anchor="middle"
+              font-family="'DM Mono',monospace"
+            >
+              PRODUCT DECISION
+            </text>
+            <text
+              x="560"
+              y="106"
+              font-size="7"
+              fill="#A8A39B"
+              text-anchor="middle"
+              font-family="'DM Mono',monospace"
+            >
+              CONVERSION DESIGN
+            </text>
+
+            <!-- Decisions row -->
+            <line
+              x1="40"
+              y1="114"
+              x2="600"
+              y2="114"
+              stroke="#E8E6E1"
+              stroke-width="1"
+            />
+            <text
+              x="320"
+              y="132"
+              font-size="7.5"
+              fill="#6B6560"
+              text-anchor="middle"
+              font-family="'DM Mono',monospace"
+            >
+              Scope → Prioritize → Coordinate engineering → Ship → Measure →
+              Iterate
+            </text>
+
+            <!-- Metrics -->
+            <rect
+              x="40"
+              y="148"
+              width="170"
+              height="52"
+              rx="5"
+              fill="#F8F7F5"
+              stroke="#E8E6E1"
+              stroke-width="1"
+            />
+            <text
+              x="125"
+              y="166"
+              font-size="8.5"
+              fill="#2A2520"
+              text-anchor="middle"
+              font-family="'DM Mono',monospace"
+            >
+              Before
+            </text>
+            <text
+              x="125"
+              y="181"
+              font-size="7.5"
+              fill="#A8A39B"
+              text-anchor="middle"
+              font-family="'DM Mono',monospace"
+            >
+              5-field form · competing CTAs
+            </text>
+            <text
+              x="125"
+              y="193"
+              font-size="7.5"
+              fill="#A8A39B"
+              text-anchor="middle"
+              font-family="'DM Mono',monospace"
+            >
+              demo buried · mobile not optimized
+            </text>
+
+            <rect
+              x="430"
+              y="148"
+              width="170"
+              height="52"
+              rx="5"
+              fill="#EBF5EB"
+              stroke="#B8D9B8"
+              stroke-width="1"
+            />
+            <text
+              x="515"
+              y="166"
+              font-size="8.5"
+              fill="#2D6B2D"
+              text-anchor="middle"
+              font-family="'DM Mono',monospace"
+            >
+              After
+            </text>
+            <text
+              x="515"
+              y="181"
+              font-size="7.5"
+              fill="#4A6741"
+              text-anchor="middle"
+              font-family="'DM Mono',monospace"
+            >
+              2-field form · single CTA
+            </text>
+            <text
+              x="515"
+              y="193"
+              font-size="7.5"
+              fill="#4A6741"
+              text-anchor="middle"
+              font-family="'DM Mono',monospace"
+            >
+              demo in funnel · mobile-first
+            </text>
+
+            <text
+              x="320"
+              y="172"
+              font-size="9"
+              fill="#6B6560"
+              text-anchor="middle"
+              font-family="'DM Mono',monospace"
+            >
+              →
+            </text>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="body-wrap">
+      <div class="cs-sec reveal">
+        <div class="cs-sec-label">Context</div>
+        <h2 class="cs-h2">Vision in place, no product execution.</h2>
+        <p class="cs-p">
+          Flowmersion builds motion-capture technology for snowsports: real-time
+          feedback on your riding technique, delivered through an XR experience.
+          When I joined, the technology was in development, a website existed,
+          and there was a vision. What was missing was product execution: a
+          roadmap, an onboarding system that didn't lose people halfway through,
+          and a funnel that converted interest into waitlist entries.
+        </p>
+        <p class="cs-p">
+          I joined as technical product lead. In a pre-launch startup, that
+          means owning every product decision from roadmap to sprint to ship.
+          There was no other PM; engineering decisions waited on me.
+        </p>
+      </div>
+
+      <div class="cs-hr"></div>
+
+      <div class="cs-sec reveal">
+        <div class="cs-sec-label">Execution Phases</div>
+        <h2 class="cs-h2">How I ran the program.</h2>
+        <div class="phases">
+          <div class="phase">
+            <div class="phase-label">Phase 1</div>
+            <div class="phase-title">Discovery &amp; Scoping</div>
+            <div class="phase-body">
+              Mapped the existing product, identified the broken funnel, and
+              defined scope for sprint 1. Set success metrics before writing a
+              line of spec.
+            </div>
+          </div>
+          <div class="phase">
+            <div class="phase-label">Phase 2</div>
+            <div class="phase-title">Roadmap &amp; Sprint Structure</div>
+            <div class="phase-body">
+              Built a prioritized roadmap with clear acceptance criteria. Ran
+              sprint planning with engineering: scope, estimate, commit. No
+              vague "improve X."
+            </div>
+          </div>
+          <div class="phase">
+            <div class="phase-label">Phase 3</div>
+            <div class="phase-title">Build &amp; Coordination</div>
+            <div class="phase-body">
+              Directed engineering execution. Unblocked decisions in real time.
+              Reviewed implementations against spec. Kept scope tight when new
+              ideas surfaced.
+            </div>
+          </div>
+          <div class="phase">
+            <div class="phase-label">Phase 4</div>
+            <div class="phase-title">Launch &amp; Measurement</div>
+            <div class="phase-body">
+              Shipped to live users. Instrumented the funnel. Measured against
+              the metrics set in Phase 1. Iterated based on what the data
+              showed.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cs-hr"></div>
+
+      <div class="cs-sec reveal">
+        <div class="cs-sec-label">The Product Problem</div>
+        <h2 class="cs-h2">The original funnel was losing people.</h2>
+        <div class="ba-grid">
+          <div class="ba-col">
+            <div class="ba-label before">Before: What I Inherited</div>
+            <ul class="ba-list before">
+              <li>
+                Competing CTAs on the landing page, no clear primary action
+              </li>
+              <li>
+                5-field signup form with required fields that users were
+                abandoning
+              </li>
+              <li>Demo buried behind navigation, not in the onboarding path</li>
+              <li>
+                Confirmation page that ended in a dead end: no community hook,
+                no next step
+              </li>
+              <li>
+                Not optimized for mobile, the primary use case for this product
+              </li>
+            </ul>
+          </div>
+          <div class="ba-col">
+            <div class="ba-label after">After: What I Shipped</div>
+            <ul class="ba-list after">
+              <li>
+                Single primary CTA, join waitlist. Everything else secondary or
+                removed
+              </li>
+              <li>
+                2-field form: email and riding level. Get them in the door first
+              </li>
+              <li>SmartRide motion demo built into the onboarding path</li>
+              <li>
+                Confirmation triggers a community invitation. Waitlist becomes
+                membership
+              </li>
+              <li>
+                Mobile-first layout: designed for the phone, then adapted up
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="cs-hr"></div>
+
+      <div class="cs-sec reveal">
+        <div class="cs-sec-label">Product Decisions</div>
+        <h2 class="cs-h2">The decisions behind the numbers.</h2>
+        <div class="decision">
+          <div class="decision-label">Mobile-first, not mobile-adapted</div>
+          <div class="decision-text">
+            Designing for a 390px viewport forces you to decide what must be
+            there and what can be cut. That produced a tighter product than
+            designing desktop-down would have.
+          </div>
+        </div>
+        <div class="decision">
+          <div class="decision-label">
+            Demo as part of the funnel, not a separate feature
+          </div>
+          <div class="decision-text">
+            Moving the SmartRide demo into the onboarding path turned it from a
+            feature people might find into a moment that reinforced why they
+            just signed up. Demo → confirmation went from a dead end to a
+            conversion hook.
+          </div>
+        </div>
+        <div class="decision">
+          <div class="decision-label">
+            2-field form over "collect everything upfront"
+          </div>
+          <div class="decision-text">
+            Collect the minimum required to get someone in the door, then ask
+            more once they've committed.
+          </div>
+        </div>
+        <div class="decision">
+          <div class="decision-label">Confirmation as community membership</div>
+          <div class="decision-text">
+            Converts a passive waitlist spot into an active community membership
+            with a next step. One copy update, but a qualitatively different
+            relationship between the user and the product.
+          </div>
+        </div>
+      </div>
+
+      <div class="cs-hr"></div>
+
+      <div class="cs-sec reveal">
+        <div class="cs-sec-label">What I Learned</div>
+        <h2 class="cs-h2">What I took from it.</h2>
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">01</div>
+            <div>
+              <div class="step-title">
+                At pre-launch, the funnel is the product
+              </div>
+              <div class="step-body">
+                How someone experiences signing up <em>is</em> the product for
+                most early users. They never get further. Treating conversion
+                optimization as separate from product engineering was the
+                original mistake. Fixing it meant owning both at once, which is
+                what a technical PM does.
+              </div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">02</div>
+            <div>
+              <div class="step-title">
+                Prioritization is the hardest engineering decision
+              </div>
+              <div class="step-body">
+                With a small team at pre-launch, the most important decisions
+                weren't technical. They were about what to build and what to
+                cut. Getting that right required an explicit model of what
+                success looked like before the sprint started, not after it
+                ended.
+              </div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">03</div>
+            <div>
+              <div class="step-title">
+                Accountability without authority is the PM condition
+              </div>
+              <div class="step-body">
+                I owned the outcomes: conversion, completion, signups. But I had
+                no direct authority over engineering execution. Getting things
+                done in that structure required clear specs, fast decisions, and
+                a relationship with engineers built on clarity rather than
+                command. That's the actual skill.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="next-bar reveal">
+      <div>
+        <div class="next-label">Back to the beginning</div>
+        <div class="next-title">Production AWS Intelligence Pipeline</div>
+      </div>
+      <a href="project-pipeline.html" class="next-arrow">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path
+            d="M1 13L13 1M13 1H4M13 1v9"
+            stroke="currentColor"
+            stroke-width="1.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </a>
+    </div>
+
+    <script>
+      const io = new IntersectionObserver(
+        (e) => {
+          e.forEach((x) => {
+            if (x.isIntersecting) {
+              x.target.classList.add("in");
+              io.unobserve(x.target);
+            }
+          });
+        },
+        { threshold: 0.06, rootMargin: "0px 0px -24px 0px" },
+      );
+      document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+    </script>
+  </body>
+</html>

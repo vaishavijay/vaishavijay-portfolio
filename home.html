@@ -1,0 +1,2452 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vaishavi Jay · Portfolio Home</title>
+    <meta
+      name="description"
+      content="Vaishavi Jay — cloud and platform engineer. I design, ship, and own production AWS systems end to end: serverless integration platforms, data pipelines, and AI-backed services."
+    />
+    <link rel="icon" href="favicon.png" />
+    <!-- Open Graph / social preview -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://vaishavijay.com" />
+    <meta
+      property="og:title"
+      content="Vaishavi Jay · Cloud &amp; Platform Engineer"
+    />
+    <meta
+      property="og:description"
+      content="I design, ship, and own production AWS systems end to end — serverless platforms, data pipelines, and AI-backed services."
+    />
+    <meta
+      property="og:image"
+      content="https://vaishavijay.com/vaishavijayheadshot.png"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Vaishavi Jay · Cloud &amp; Platform Engineer"
+    />
+    <meta
+      name="twitter:description"
+      content="I design, ship, and own production AWS systems end to end — serverless platforms, data pipelines, and AI-backed services."
+    />
+    <meta
+      name="twitter:image"
+      content="https://vaishavijay.com/vaishavi-jayashankar-headshot.png"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* ─── TOKENS ─────────────────────────────── */
+      :root {
+        --white: #ffffff;
+        --off: #f8f7f5;
+        --border: #e8e6e1;
+        --muted: #a8a39b;
+        --mid: #6b6560;
+        --body: #2a2520;
+        --ink: #111109;
+        --accent: #5c7052;
+        --gold: #a9884f;
+        --serif: "Space Grotesk", system-ui, sans-serif;
+        --sans: "Inter", system-ui, sans-serif;
+        --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+        --ease: cubic-bezier(0.16, 1, 0.3, 1);
+        --w: 1120px;
+        --gx: clamp(1.5rem, 5vw, 4rem);
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background: var(--white);
+        color: var(--body);
+        font-family: var(--sans);
+        font-size: 16px;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      img {
+        display: block;
+        max-width: 100%;
+      }
+
+      /* ─── NAV ────────────────────────────────── */
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        padding: 1.5rem var(--gx);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        transition: background 0.35s var(--ease);
+      }
+
+      nav.filled {
+        background: rgba(255, 255, 255, 0.94);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--border);
+      }
+
+      .n-logo {
+        font-family: var(--serif);
+        font-size: 1rem;
+        font-weight: 400;
+        color: var(--ink);
+        letter-spacing: -0.01em;
+      }
+
+      .n-links {
+        display: flex;
+        align-items: center;
+        gap: 2.5rem;
+        list-style: none;
+      }
+
+      .n-links a {
+        font-size: 0.82rem;
+        font-weight: 400;
+        color: var(--mid);
+        letter-spacing: 0.02em;
+        transition: color 0.18s;
+      }
+
+      .n-links a:hover {
+        color: var(--ink);
+      }
+
+      .n-links .n-resume {
+        font-size: 0.8rem;
+        color: var(--ink);
+        border: 1px solid var(--border);
+        padding: 0.4rem 1rem;
+        border-radius: 100px;
+        font-weight: 500;
+        transition:
+          background 0.2s,
+          border-color 0.2s;
+      }
+
+      .n-links .n-resume:hover {
+        background: var(--off);
+        border-color: var(--muted);
+      }
+
+      /* ─── HERO ───────────────────────────────── */
+      #hero {
+        min-height: 100svh;
+        max-width: calc(var(--w) + var(--gx) * 2);
+        margin: 0 auto;
+        padding: 0 var(--gx);
+        display: flex;
+        align-items: center;
+        padding-top: 5rem;
+      }
+
+      .hero-inner {
+        display: grid;
+        grid-template-columns: 1fr 300px;
+        gap: 4.5rem;
+        align-items: center;
+        width: 100%;
+      }
+
+      .hero-about {
+        opacity: 0;
+        animation: fadein 0.9s var(--ease) 0.5s forwards;
+      }
+
+      .hero-name-pfp {
+        width: clamp(2.2rem, 5vw, 4.2rem);
+        height: clamp(2.2rem, 5vw, 4.2rem);
+        border-radius: 50%;
+        object-fit: cover;
+        object-position: center top;
+        border: 1px solid var(--border);
+        margin-left: 0.9rem;
+        align-self: center;
+        flex-shrink: 0;
+        opacity: 0;
+        animation: fadein 0.9s var(--ease) 0.4s forwards;
+      }
+
+      .hero-skills {
+        margin-top: 1.25rem;
+      }
+
+      .hero-about .about-aside-row {
+        padding: 1rem 0;
+      }
+
+      .hero-name-row {
+        display: flex;
+        align-items: flex-end;
+        gap: 0.5rem;
+        flex-wrap: nowrap;
+        margin-bottom: 1.25rem;
+      }
+
+      .hero-firstname {
+        font-family: var(--serif);
+        font-size: clamp(2.2rem, 5vw, 4.2rem);
+        font-weight: 500;
+        line-height: 0.98;
+        color: var(--ink);
+        letter-spacing: -0.025em;
+        flex-shrink: 0;
+        opacity: 0;
+        transform: translateY(30px);
+        animation: up 0.9s var(--ease) 0.05s forwards;
+      }
+
+      .hero-lastname {
+        font-family: var(--serif);
+        font-size: clamp(2.2rem, 5vw, 4.2rem);
+        font-weight: 500;
+        line-height: 0.98;
+        color: var(--ink);
+        letter-spacing: -0.025em;
+        flex-shrink: 0;
+        opacity: 0;
+        transform: translateY(30px);
+        animation: up 0.9s var(--ease) 0.15s forwards;
+      }
+
+      .hero-role-row {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 0.85rem 1.25rem;
+        margin-bottom: 2.25rem;
+        opacity: 0;
+        animation: fadein 0.7s var(--ease) 0.55s forwards;
+      }
+
+      .role-current {
+        font-family: var(--mono);
+        font-size: 0.78rem;
+        color: var(--body);
+        letter-spacing: 0.01em;
+      }
+
+      .role-label {
+        font-family: var(--mono);
+        font-size: 0.72rem;
+        font-weight: 400;
+        color: var(--muted);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        flex-shrink: 0;
+      }
+
+      .role-divider {
+        width: 1px;
+        height: 1rem;
+        background: var(--border);
+        flex-shrink: 0;
+      }
+
+      .hero-bio {
+        max-width: 480px;
+        font-size: 0.95rem;
+        font-weight: 400;
+        color: var(--mid);
+        line-height: 1.75;
+        margin-bottom: 2.5rem;
+        opacity: 0;
+        animation: up 0.8s var(--ease) 0.65s forwards;
+      }
+
+      .hero-bio strong {
+        color: var(--body);
+        font-weight: 500;
+      }
+
+      .hero-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 2.5rem;
+        opacity: 0;
+        animation: up 0.8s var(--ease) 0.75s forwards;
+      }
+
+      .hero-tag {
+        font-family: var(--mono);
+        font-size: 0.66rem;
+        font-weight: 400;
+        color: var(--mid);
+        background: var(--off);
+        border: 1px solid var(--border);
+        padding: 0.3rem 0.75rem;
+        border-radius: 100px;
+        letter-spacing: 0.03em;
+      }
+
+      .hero-ctas {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        opacity: 0;
+        animation: up 0.8s var(--ease) 0.85s forwards;
+      }
+
+      .cta-primary {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: var(--white);
+        background: var(--ink);
+        padding: 0.7rem 1.5rem;
+        border-radius: 100px;
+        transition:
+          opacity 0.2s,
+          transform 0.2s var(--ease);
+      }
+
+      .cta-primary:hover {
+        opacity: 0.85;
+        transform: translateY(-1px);
+      }
+
+      .cta-secondary {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        font-size: 0.85rem;
+        font-weight: 400;
+        color: var(--body);
+        border: 1px solid var(--border);
+        padding: 0.7rem 1.5rem;
+        border-radius: 100px;
+        transition:
+          border-color 0.2s,
+          background 0.2s,
+          transform 0.2s var(--ease);
+      }
+
+      .cta-secondary:hover {
+        border-color: var(--muted);
+        background: var(--off);
+        transform: translateY(-1px);
+      }
+
+      .hero-photo {
+        flex-shrink: 0;
+        opacity: 0;
+        animation: fadein 0.9s var(--ease) 0.4s forwards;
+      }
+
+      .hero-photo-frame {
+        width: 300px;
+        height: 330px;
+        border-radius: 180px;
+        background: var(--off);
+        border: 1px solid var(--border);
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+      }
+
+      .photo-note {
+        position: absolute;
+        bottom: -1.75rem;
+        left: 50%;
+        transform: translateX(-50%);
+        font-family: var(--mono);
+        font-size: 0.58rem;
+        color: var(--muted);
+        white-space: nowrap;
+        letter-spacing: 0.04em;
+      }
+
+      /* ─── SECTION SHELL ──────────────────────── */
+      .section {
+        padding: 6rem var(--gx);
+      }
+
+      .section-w {
+        max-width: var(--w);
+        margin: 0 auto;
+      }
+
+      .s-label {
+        font-family: var(--mono);
+        font-size: 0.68rem;
+        font-weight: 400;
+        color: var(--muted);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        margin-bottom: 2.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .s-label::before {
+        content: "";
+        width: 18px;
+        height: 1px;
+        background: var(--gold);
+      }
+
+      /* ─── WORK ───────────────────────────────── */
+      #work {
+        background: var(--white);
+      }
+
+      .work-header {
+        max-width: var(--w);
+        margin: 0 auto;
+        padding: 0 0 3rem;
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 2rem;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .work-h {
+        font-family: var(--serif);
+        font-size: clamp(1.75rem, 3vw, 2.5rem);
+        font-weight: 400;
+        color: var(--ink);
+        letter-spacing: -0.02em;
+        line-height: 1.15;
+      }
+
+      .work-h em {
+        font-style: italic;
+        color: var(--mid);
+      }
+
+      .work-sub {
+        font-size: 0.875rem;
+        font-weight: 400;
+        color: var(--muted);
+        max-width: 320px;
+        line-height: 1.65;
+        text-align: right;
+      }
+
+      /* ─── WORK GRID ──────────────────────────── */
+      .proj-grid {
+        max-width: var(--w);
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2px;
+        background: var(--border);
+        border: 1px solid var(--border);
+      }
+
+      .proj-card {
+        background: var(--white);
+        cursor: pointer;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        color: inherit;
+      }
+
+      .proj-cover {
+        aspect-ratio: 16/10;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .proj-cover-inner {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        transition: transform 0.6s var(--ease);
+      }
+
+      .proj-card:hover .proj-cover-inner {
+        transform: scale(1.03);
+      }
+
+      .proj-info {
+        padding: 1.6rem 2rem 1.9rem;
+        border-top: 1px solid var(--border);
+        display: flex;
+        flex-direction: column;
+        gap: 0.55rem;
+        flex: 1;
+      }
+
+      .proj-head {
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+      }
+
+      .proj-type {
+        font-family: var(--mono);
+        font-size: 0.62rem;
+        color: var(--muted);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      .proj-title {
+        font-family: var(--serif);
+        font-size: 1.35rem;
+        font-weight: 500;
+        color: var(--ink);
+        line-height: 1.2;
+        letter-spacing: -0.015em;
+        transition: color 0.2s;
+      }
+
+      .proj-card:hover .proj-title {
+        color: var(--accent);
+      }
+
+      .proj-metric {
+        font-family: var(--mono);
+        font-size: 0.68rem;
+        color: var(--accent);
+        letter-spacing: 0.01em;
+        margin-top: 0.25rem;
+      }
+
+      .proj-card.full {
+        grid-column: 1 / -1;
+      }
+
+      .proj-card.full .proj-cover {
+        aspect-ratio: 21/8;
+      }
+
+      .proj-card.full .proj-info {
+        flex-direction: row;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 1.5rem 2.5rem;
+      }
+
+      .proj-card.full .proj-metric {
+        margin-top: 0;
+        white-space: nowrap;
+      }
+
+      .proj-card.full .proj-title {
+        font-size: 1.55rem;
+      }
+
+      /* Cover — 01 Pipeline */
+      .cover-pipeline {
+        background: #0f1117;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        padding: 2rem;
+        font-family: var(--mono);
+      }
+
+      .pipe-diagram {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+        width: 100%;
+        max-width: 320px;
+      }
+
+      .pipe-row {
+        display: flex;
+        align-items: center;
+        gap: 0;
+        width: 100%;
+      }
+
+      .pipe-node {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.4rem 0.75rem;
+        border-radius: 4px;
+        font-size: 0.65rem;
+        font-weight: 400;
+        letter-spacing: 0.03em;
+        flex-shrink: 0;
+      }
+
+      .pn-trigger {
+        background: rgba(107, 167, 100, 0.15);
+        color: #7fbf79;
+        border: 1px solid rgba(107, 167, 100, 0.25);
+      }
+
+      .pn-lambda {
+        background: rgba(255, 153, 0, 0.1);
+        color: #e8952a;
+        border: 1px solid rgba(255, 153, 0, 0.2);
+      }
+
+      .pn-api {
+        background: rgba(100, 140, 220, 0.12);
+        color: #7fa8e8;
+        border: 1px solid rgba(100, 140, 220, 0.22);
+      }
+
+      .pn-store {
+        background: rgba(220, 100, 100, 0.1);
+        color: #e88080;
+        border: 1px solid rgba(220, 100, 100, 0.2);
+      }
+
+      .pn-ai {
+        background: rgba(180, 140, 240, 0.12);
+        color: #c4a0f0;
+        border: 1px solid rgba(180, 140, 240, 0.22);
+      }
+
+      .pn-out {
+        background: rgba(200, 200, 200, 0.08);
+        color: #aaa;
+        border: 1px solid rgba(200, 200, 200, 0.15);
+      }
+
+      .pipe-conn {
+        flex: 1;
+        height: 1px;
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      .pipe-conn-v {
+        width: 1px;
+        height: 10px;
+        background: rgba(255, 255, 255, 0.1);
+        margin: 0 1.2rem;
+      }
+
+      .pipe-dot {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: currentColor;
+        flex-shrink: 0;
+      }
+
+      .pipe-label {
+        font-size: 0.58rem;
+        color: rgba(255, 255, 255, 0.3);
+        margin-left: 0.4rem;
+        white-space: nowrap;
+      }
+
+      /* Cover — 02 CRM */
+      .cover-crm {
+        background: #f5f3ef;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        padding: 2rem;
+        font-family: var(--mono);
+      }
+
+      .crm-map {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        gap: 1rem;
+        align-items: center;
+        width: 100%;
+        max-width: 340px;
+      }
+
+      .crm-col {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .crm-b {
+        padding: 0.5rem 0.75rem;
+        border-radius: 6px;
+        font-size: 0.65rem;
+        font-weight: 400;
+        text-align: center;
+      }
+
+      .crm-hub {
+        background: #fff0e6;
+        color: #c05a00;
+        border: 1px solid #ffdcc0;
+      }
+
+      .crm-ts {
+        background: #eff3ff;
+        color: #3a5aaa;
+        border: 1px solid #ccdaff;
+      }
+
+      .crm-molo {
+        background: #f0f8f0;
+        color: #357035;
+        border: 1px solid #c0dfc0;
+      }
+
+      .crm-mid {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.4rem;
+      }
+
+      .crm-lambda-pill {
+        background: var(--ink);
+        color: var(--white);
+        padding: 0.45rem 0.7rem;
+        border-radius: 4px;
+        font-size: 0.6rem;
+        font-weight: 400;
+        text-align: center;
+        white-space: nowrap;
+      }
+
+      .crm-arrows {
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+        align-items: center;
+      }
+
+      .crm-arr {
+        font-size: 0.7rem;
+        color: var(--muted);
+      }
+
+      /* Cover — 03 NUCEE */
+      .cover-nucee {
+        background: linear-gradient(145deg, #1a1f13 0%, #2c3520 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        padding: 2rem;
+        font-family: var(--mono);
+      }
+
+      .schema-wrap {
+        display: flex;
+        gap: 1rem;
+        width: 100%;
+        max-width: 340px;
+      }
+
+      .schema-tbl {
+        flex: 1;
+        border-radius: 6px;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .schema-head {
+        background: rgba(255, 255, 255, 0.12);
+        padding: 0.4rem 0.65rem;
+        font-size: 0.6rem;
+        color: rgba(255, 255, 255, 0.7);
+        letter-spacing: 0.04em;
+        font-weight: 400;
+      }
+
+      .schema-field {
+        padding: 0.3rem 0.65rem;
+        font-size: 0.58rem;
+        color: rgba(255, 255, 255, 0.45);
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .schema-type {
+        color: rgba(107, 167, 100, 0.7);
+      }
+
+      .schema-stat {
+        margin-top: 0.75rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+      }
+
+      .schema-s {
+        font-size: 0.62rem;
+        color: rgba(255, 255, 255, 0.4);
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+      }
+
+      /* Cover — 04 Aspire */
+      .cover-bedrock {
+        background: #f0eef8;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        padding: 2rem;
+        font-family: var(--sans);
+      }
+
+      .chat-ui {
+        display: flex;
+        flex-direction: column;
+        gap: 0.65rem;
+        width: 100%;
+        max-width: 300px;
+      }
+
+      .chat-bar {
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 0.5rem 0.85rem;
+        font-size: 0.68rem;
+        color: var(--mid);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+      }
+
+      .chat-b-label {
+        font-family: var(--mono);
+        font-size: 0.58rem;
+        color: var(--muted);
+      }
+
+      .chat-msg-u {
+        align-self: flex-end;
+        background: var(--ink);
+        color: var(--white);
+        border-radius: 12px 12px 2px 12px;
+        padding: 0.55rem 0.85rem;
+        font-size: 0.72rem;
+        max-width: 85%;
+        line-height: 1.4;
+      }
+
+      .chat-msg-b {
+        align-self: flex-start;
+        background: var(--white);
+        color: var(--body);
+        border: 1px solid var(--border);
+        border-radius: 12px 12px 12px 2px;
+        padding: 0.55rem 0.85rem;
+        font-size: 0.72rem;
+        max-width: 85%;
+        line-height: 1.4;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+      }
+
+      .chat-badge {
+        align-self: flex-start;
+        font-family: var(--mono);
+        font-size: 0.55rem;
+        color: var(--muted);
+        padding: 0.2rem 0.5rem;
+        background: var(--off);
+        border: 1px solid var(--border);
+        border-radius: 4px;
+      }
+
+      /* Cover — 05 Flowmersion */
+      .cover-flow {
+        background: #0b1420;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        padding: 0;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .flow-bg {
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(
+            ellipse at 40% 60%,
+            rgba(40, 80, 140, 0.35) 0%,
+            transparent 65%
+          ),
+          radial-gradient(
+            ellipse at 70% 30%,
+            rgba(20, 60, 100, 0.2) 0%,
+            transparent 55%
+          );
+      }
+
+      .flow-content {
+        position: relative;
+        z-index: 1;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .flow-title {
+        font-family: var(--serif);
+        font-size: 2rem;
+        font-weight: 500;
+        color: rgba(220, 230, 245, 0.9);
+        letter-spacing: -0.03em;
+        line-height: 1;
+      }
+
+      .flow-title em {
+        font-style: normal;
+        color: rgba(180, 200, 235, 0.75);
+      }
+
+      .flow-sub {
+        font-family: var(--mono);
+        font-size: 0.6rem;
+        color: rgba(150, 175, 210, 0.55);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      .flow-stats {
+        display: flex;
+        gap: 1.5rem;
+        margin-top: 0.5rem;
+      }
+
+      .flow-stat {
+        text-align: center;
+      }
+
+      .flow-stat-v {
+        font-family: var(--serif);
+        font-size: 1.4rem;
+        color: rgba(220, 235, 255, 0.85);
+        font-weight: 500;
+        line-height: 1;
+      }
+
+      .flow-stat-l {
+        font-family: var(--mono);
+        font-size: 0.55rem;
+        color: rgba(150, 175, 210, 0.5);
+        margin-top: 0.2rem;
+        letter-spacing: 0.04em;
+      }
+
+      /* ─── EXPERIENCE ─────────────────────────── */
+      #experience {
+        background: var(--off);
+        border-top: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+      }
+
+      .exp-layout {
+        max-width: var(--w);
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 280px 1fr;
+        gap: 5rem;
+      }
+
+      .exp-nav {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .exp-tab {
+        padding: 1.25rem 0;
+        border-top: 1px solid var(--border);
+        cursor: pointer;
+        opacity: 0.4;
+        transition: opacity 0.2s;
+      }
+
+      .exp-tab.on {
+        opacity: 1;
+      }
+
+      .exp-tab:hover {
+        opacity: 0.7;
+      }
+
+      .exp-tab.on:hover {
+        opacity: 1;
+      }
+
+      .et-role {
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--ink);
+        margin-bottom: 0.2rem;
+      }
+
+      .et-org {
+        font-size: 0.82rem;
+        font-weight: 400;
+        color: var(--mid);
+      }
+
+      .et-date {
+        font-family: var(--mono);
+        font-size: 0.62rem;
+        color: var(--muted);
+        margin-top: 0.3rem;
+        letter-spacing: 0.02em;
+      }
+
+      .exp-panels {
+        min-width: 0;
+      }
+
+      .exp-panels > div {
+        display: none;
+      }
+
+      .exp-panels > div.on {
+        display: block;
+      }
+
+      .ep-role {
+        font-family: var(--serif);
+        font-size: clamp(1.5rem, 2.5vw, 2rem);
+        font-weight: 400;
+        color: var(--ink);
+        line-height: 1.2;
+        letter-spacing: -0.02em;
+        margin-bottom: 0.35rem;
+      }
+
+      .ep-org {
+        font-size: 0.9rem;
+        color: var(--mid);
+        margin-bottom: 0.2rem;
+      }
+
+      .ep-date {
+        font-family: var(--mono);
+        font-size: 0.65rem;
+        color: var(--muted);
+        margin-bottom: 1.75rem;
+        letter-spacing: 0.02em;
+      }
+
+      .ep-list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 0.85rem;
+      }
+
+      .ep-list li {
+        position: relative;
+        padding-left: 1.25rem;
+        font-size: 0.95rem;
+        color: var(--mid);
+        line-height: 1.72;
+        word-break: break-word;
+        overflow-wrap: break-word;
+      }
+
+      .ep-list li::before {
+        content: "→";
+        position: absolute;
+        left: 0;
+        top: 0.05em;
+        color: var(--accent);
+        font-size: 0.8rem;
+      }
+
+      .ep-list li strong {
+        color: var(--body);
+        font-weight: 500;
+      }
+
+      .ep-tools {
+        margin-top: 1.75rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+      }
+
+      .ep-tool {
+        font-family: var(--mono);
+        font-size: 0.6rem;
+        color: var(--mid);
+        background: var(--white);
+        border: 1px solid var(--border);
+        padding: 0.22rem 0.55rem;
+        border-radius: 4px;
+      }
+
+      /* ─── ABOUT ──────────────────────────────── */
+      #about {
+        background: var(--white);
+      }
+
+      .about-grid {
+        max-width: var(--w);
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 6rem;
+        align-items: start;
+      }
+
+      .about-lead {
+        font-family: var(--serif);
+        font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+        font-weight: 400;
+        color: var(--ink);
+        line-height: 1.4;
+        letter-spacing: -0.015em;
+        margin-bottom: 1.5rem;
+      }
+
+      .about-lead em {
+        font-style: normal;
+        color: var(--accent);
+      }
+
+      .about-p {
+        font-size: 0.9rem;
+        color: var(--mid);
+        line-height: 1.8;
+        margin-bottom: 1.1rem;
+      }
+
+      .about-p strong {
+        color: var(--body);
+        font-weight: 500;
+      }
+
+      .skills {
+        margin-top: 2.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .skill-g-label {
+        font-family: var(--mono);
+        font-size: 0.62rem;
+        color: var(--muted);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-bottom: 0.6rem;
+      }
+
+      .skill-chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.35rem;
+      }
+
+      .skill-chip {
+        font-size: 0.78rem;
+        color: var(--body);
+        background: var(--off);
+        border: 1px solid var(--border);
+        padding: 0.28rem 0.7rem;
+        border-radius: 100px;
+      }
+
+      .about-aside {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+      }
+
+      .about-aside-row {
+        padding: 1.2rem 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .about-aside-row:first-child {
+        border-top: 1px solid var(--border);
+      }
+
+      .aar-label {
+        font-family: var(--mono);
+        font-size: 0.6rem;
+        color: var(--muted);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-bottom: 0.45rem;
+      }
+
+      .aar-content {
+        font-size: 0.875rem;
+        color: var(--mid);
+        line-height: 1.6;
+      }
+
+      .aar-content strong {
+        color: var(--body);
+        font-weight: 500;
+      }
+
+      /* ─── CONTACT ────────────────────────────── */
+      #contact {
+        background: var(--ink);
+        padding: 8rem var(--gx) 7rem;
+      }
+
+      .contact-inner {
+        max-width: var(--w);
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 6rem;
+        align-items: start;
+      }
+
+      .contact-h {
+        font-family: var(--serif);
+        font-size: clamp(2.5rem, 5vw, 4.5rem);
+        font-weight: 400;
+        color: var(--white);
+        line-height: 1.05;
+        letter-spacing: -0.03em;
+        margin-bottom: 1.5rem;
+      }
+
+      .contact-h em {
+        font-style: normal;
+        color: rgba(255, 255, 255, 0.5);
+      }
+
+      .contact-sub {
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.45);
+        line-height: 1.75;
+        margin-bottom: 2.5rem;
+      }
+
+      .contact-links {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+      }
+
+      .contact-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1.1rem 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        transition: opacity 0.2s;
+      }
+
+      .contact-row:last-child {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .contact-row:hover {
+        opacity: 0.6;
+      }
+
+      .cr-label {
+        font-size: 0.875rem;
+        font-weight: 400;
+        color: rgba(255, 255, 255, 0.8);
+      }
+
+      .cr-val {
+        font-family: var(--mono);
+        font-size: 0.72rem;
+        color: rgba(255, 255, 255, 0.35);
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+      }
+
+      .status-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-family: var(--mono);
+        font-size: 0.65rem;
+        color: rgba(147, 175, 138, 0.9);
+        border: 1px solid rgba(147, 175, 138, 0.28);
+        padding: 0.35rem 0.85rem;
+        border-radius: 4px;
+        margin-bottom: 2.5rem;
+        letter-spacing: 0.06em;
+      }
+
+      .status-dot {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: currentColor;
+      }
+
+      .target-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+      }
+
+      .target-row {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.9rem 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.07);
+        font-size: 0.875rem;
+        color: rgba(255, 255, 255, 0.45);
+      }
+
+      .target-row:last-child {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+      }
+
+      .target-row::before {
+        content: "";
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background: rgba(107, 167, 100, 0.6);
+        flex-shrink: 0;
+      }
+
+      /* ─── FOOTER ─────────────────────────────── */
+      footer {
+        padding: 1.75rem var(--gx);
+        background: var(--ink);
+        border-top: 1px solid rgba(255, 255, 255, 0.07);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+
+      .f-copy {
+        font-family: var(--mono);
+        font-size: 0.62rem;
+        color: rgba(255, 255, 255, 0.2);
+        letter-spacing: 0.04em;
+      }
+
+      .f-links {
+        display: flex;
+        gap: 2rem;
+      }
+
+      .f-links a {
+        font-family: var(--mono);
+        font-size: 0.62rem;
+        color: rgba(255, 255, 255, 0.2);
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        transition: color 0.2s;
+      }
+
+      .f-links a:hover {
+        color: rgba(255, 255, 255, 0.5);
+      }
+
+      /* ─── ANIMATIONS ─────────────────────────── */
+      @keyframes up {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+
+      @keyframes fadein {
+        from {
+          opacity: 0;
+        }
+
+        to {
+          opacity: 1;
+        }
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(22px);
+        transition:
+          opacity 0.7s var(--ease),
+          transform 0.7s var(--ease);
+      }
+
+      .reveal.in {
+        opacity: 1;
+        transform: none;
+      }
+
+      .d1 {
+        transition-delay: 0.1s;
+      }
+
+      .d2 {
+        transition-delay: 0.2s;
+      }
+
+      .d3 {
+        transition-delay: 0.3s;
+      }
+
+      /* ─── BURGER ─────────────────────────────── */
+      .burger {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+        border: none;
+        background: none;
+        padding: 4px;
+      }
+
+      .burger span {
+        display: block;
+        width: 20px;
+        height: 1.5px;
+        background: var(--ink);
+      }
+
+      .mob {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: var(--white);
+        z-index: 99;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        padding: var(--gx);
+        gap: 2.5rem;
+      }
+
+      .mob.open {
+        display: flex;
+      }
+
+      .mob a {
+        font-family: var(--serif);
+        font-size: 2.5rem;
+        color: var(--ink);
+        letter-spacing: -0.02em;
+      }
+
+      /* ─── RESPONSIVE ─────────────────────────── */
+      @media (max-width: 960px) {
+        .hero-inner {
+          grid-template-columns: 1fr;
+        }
+
+        .exp-layout {
+          grid-template-columns: 1fr;
+          gap: 2.5rem;
+        }
+
+        .proj-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .proj-card.full .proj-cover {
+          aspect-ratio: 16/9;
+        }
+
+        .proj-card.full .proj-info {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 0.75rem;
+        }
+
+        .exp-nav {
+          flex-direction: row;
+          overflow-x: auto;
+          gap: 0;
+          -webkit-overflow-scrolling: touch;
+          scrollbar-width: none;
+        }
+
+        .exp-nav::-webkit-scrollbar {
+          display: none;
+        }
+
+        .exp-tab {
+          min-width: 150px;
+          border-top: none;
+          border-left: 2px solid var(--border);
+          padding: 0.75rem 1rem;
+        }
+
+        .exp-tab.on {
+          border-left-color: var(--accent);
+        }
+
+        .about-grid {
+          grid-template-columns: 1fr;
+          gap: 3rem;
+        }
+
+        .contact-inner {
+          grid-template-columns: 1fr;
+          gap: 3rem;
+        }
+
+        .n-links li:not(:last-child) {
+          display: none;
+        }
+
+        .work-header {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .work-sub {
+          text-align: left;
+        }
+      }
+
+      @media (max-width: 680px) {
+        .n-links {
+          display: none;
+        }
+
+        .burger {
+          display: flex;
+        }
+
+        nav {
+          padding: 1.1rem var(--gx);
+        }
+
+        #hero {
+          padding-top: 4.5rem;
+          min-height: auto;
+          padding-bottom: 3rem;
+        }
+
+        .hero-name-row {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 0;
+        }
+
+        .hero-firstname,
+        .hero-lastname {
+          font-size: clamp(1.8rem, 10vw, 3rem);
+        }
+
+        .role-label {
+          display: none;
+        }
+
+        .role-divider {
+          display: none;
+        }
+
+        .hero-bio {
+          font-size: 0.9rem;
+          margin-bottom: 1.75rem;
+        }
+
+        .hero-tags {
+          gap: 0.35rem;
+          margin-bottom: 1.75rem;
+        }
+
+        .hero-tag {
+          font-size: 0.6rem;
+          padding: 0.25rem 0.6rem;
+        }
+
+        .hero-ctas {
+          flex-direction: column;
+          gap: 0.75rem;
+        }
+
+        .cta-primary,
+        .cta-secondary {
+          justify-content: center;
+          width: 100%;
+        }
+
+        .section {
+          padding: 4rem var(--gx);
+        }
+
+        .work-header {
+          padding-bottom: 2rem;
+        }
+
+        .work-h {
+          font-size: 1.75rem;
+        }
+
+        .work-sub {
+          display: none;
+        }
+
+        .proj-cover {
+          aspect-ratio: 4/3;
+        }
+
+        .proj-info {
+          padding: 1.25rem 1.25rem 1.5rem;
+        }
+
+        .proj-title {
+          font-size: 1.15rem;
+        }
+
+        #experience {
+          padding: 4rem var(--gx);
+        }
+
+        .ep-role {
+          font-size: 1.35rem;
+        }
+
+        .ep-list li {
+          font-size: 0.875rem;
+          line-height: 1.65;
+        }
+
+        .ep-tools {
+          gap: 0.3rem;
+        }
+
+        .ep-tool {
+          font-size: 0.58rem;
+        }
+
+        #about {
+          padding: 4rem var(--gx);
+        }
+
+        .about-lead {
+          font-size: 1.3rem;
+        }
+
+        .about-p {
+          font-size: 0.875rem;
+        }
+
+        .skill-chip {
+          font-size: 0.72rem;
+          padding: 0.22rem 0.55rem;
+        }
+
+        #contact {
+          padding: 5rem var(--gx) 4rem;
+        }
+
+        .contact-h {
+          font-size: 2.25rem;
+        }
+
+        .contact-sub {
+          font-size: 0.85rem;
+          margin-bottom: 2rem;
+        }
+
+        .cr-label {
+          font-size: 0.82rem;
+        }
+
+        .cr-val {
+          font-size: 0.65rem;
+        }
+
+        .target-row {
+          font-size: 0.82rem;
+        }
+
+        footer {
+          flex-direction: column;
+          gap: 0.75rem;
+          align-items: flex-start;
+        }
+
+        .f-links {
+          gap: 1.25rem;
+        }
+
+        .pipe-node {
+          font-size: 0.58rem;
+          padding: 0.32rem 0.55rem;
+        }
+
+        .pipe-diagram {
+          max-width: 260px;
+        }
+
+        .crm-map {
+          max-width: 260px;
+        }
+
+        .crm-b {
+          font-size: 0.58rem;
+          padding: 0.4rem 0.5rem;
+        }
+
+        .crm-lambda-pill {
+          font-size: 0.55rem;
+          padding: 0.35rem 0.5rem;
+        }
+
+        .schema-wrap {
+          max-width: 100%;
+        }
+
+        .schema-head {
+          font-size: 0.55rem;
+        }
+
+        .schema-field {
+          font-size: 0.52rem;
+        }
+
+        .chat-ui {
+          max-width: 260px;
+        }
+
+        .chat-bar {
+          font-size: 0.6rem;
+        }
+
+        .chat-msg-u,
+        .chat-msg-b {
+          font-size: 0.65rem;
+        }
+
+        .flow-title {
+          font-size: 1.6rem;
+        }
+
+        .flow-stat-v {
+          font-size: 1.1rem;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- NAV -->
+    <nav id="nav">
+      <a href="#" class="n-logo"
+        ><img
+          src="favicon.png"
+          alt="Vaishavi Jay"
+          style="
+            height: 28px;
+            width: 28px;
+            object-fit: contain;
+            display: block;
+          "
+      /></a>
+      <ul class="n-links">
+        <li><a href="#work">Work</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li>
+          <a
+            href="Jayashankar_Vaishavi_Resume.pdf"
+            target="_blank"
+            class="n-resume"
+            >Resume ↗</a
+          >
+        </li>
+      </ul>
+      <button class="burger" id="burger">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+
+    <div class="mob" id="mob">
+      <a href="#work" onclick="cm()">Work</a>
+      <a href="#experience" onclick="cm()">Experience</a>
+      <a href="#contact" onclick="cm()">Contact</a>
+    </div>
+
+    <!-- HERO -->
+    <section id="hero">
+      <div class="hero-inner">
+        <div class="hero-text">
+          <div class="hero-name-row">
+            <span class="hero-firstname">Vaishavi</span>
+            <span class="hero-lastname">Jay</span>
+            <img
+              class="hero-name-pfp"
+              src="vaishavijayheadshot.png"
+              alt="Vaishavi Jay"
+              width="90"
+              height="90"
+            />
+          </div>
+
+          <div class="hero-role-row">
+            <span class="role-label">CS &amp; BA @ Northeastern</span>
+            <span class="role-divider"></span>
+            <span class="role-current"
+              >Cloud and systems engineering, technical program management</span
+            >
+          </div>
+
+          <p class="hero-bio">
+            I build cloud infrastructure and own it end to end. I've run
+            production AWS systems across a 20+ brand portfolio, built data
+            platforms from scratch, and led technical programs across
+            cross-functional teams.
+          </p>
+
+          <div class="hero-tags">
+            <span class="hero-tag">Technical Product Manager</span>
+            <span class="hero-tag">Cloud Engineer</span>
+            <span class="hero-tag">Software Engineer</span>
+            <span class="hero-tag">Platform Engineer</span>
+            <span class="hero-tag">DevOps Engineer</span>
+          </div>
+
+          <div class="hero-ctas">
+            <a href="#work" class="cta-primary">
+              View work
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path
+                  d="M1 7h12M7.5 2.5L12 7l-4.5 4.5"
+                  stroke="currentColor"
+                  stroke-width="1.2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </a>
+            <a href="#contact" class="cta-secondary">Get in touch</a>
+          </div>
+        </div>
+
+        <div class="hero-about">
+          <div class="about-aside">
+            <div class="about-aside-row">
+              <div class="aar-label">Recently</div>
+              <div class="aar-content">
+                Developer<br />Waterside Group<br /><span
+                  style="font-size: 0.75rem; color: var(--muted)"
+                  >Jan – Jul 2026</span
+                >
+              </div>
+            </div>
+            <div class="about-aside-row">
+              <div class="aar-label">Education</div>
+              <div class="aar-content">
+                Northeastern University<br />B.S. Computer Science &amp;
+                Business Administration<br /><span
+                  style="font-size: 0.75rem; color: var(--muted)"
+                  >Expected 2027</span
+                >
+              </div>
+            </div>
+            <div class="about-aside-row">
+              <div class="aar-label">Location</div>
+              <div class="aar-content">
+                Boston, MA · Relocating to California
+              </div>
+            </div>
+          </div>
+          <div class="hero-skills">
+            <div class="skill-g-label">Core skills</div>
+            <div class="skill-chips">
+              <span class="skill-chip">AWS</span
+              ><span class="skill-chip">Serverless</span
+              ><span class="skill-chip">Event-driven</span
+              ><span class="skill-chip">Systems Design</span
+              ><span class="skill-chip">Incident Response</span
+              ><span class="skill-chip">DevOps</span
+              ><span class="skill-chip">Python</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WORK -->
+    <section id="work" class="section">
+      <div class="section-w">
+        <div class="work-header reveal">
+          <div class="s-label">Selected work</div>
+        </div>
+
+        <div class="proj-grid reveal">
+          <a class="proj-card" href="project-crm.html">
+            <div class="proj-cover">
+              <div class="proj-cover-inner">
+                <div class="cover-crm">
+                  <div class="crm-map">
+                    <div class="crm-col">
+                      <div class="crm-b crm-hub">HubSpot CRM</div>
+                      <div class="crm-b crm-molo">Molo Marina</div>
+                    </div>
+                    <div class="crm-mid">
+                      <div class="crm-arrows">
+                        <span class="crm-arr">⇄</span>
+                      </div>
+                      <div class="crm-lambda-pill">
+                        AWS Lambda<br /><span
+                          style="opacity: 0.6; font-size: 0.55rem"
+                          >polling · EventBridge</span
+                        >
+                      </div>
+                      <div class="crm-arrows">
+                        <span class="crm-arr">⇄</span>
+                      </div>
+                    </div>
+                    <div class="crm-col">
+                      <div class="crm-b crm-ts">Tripleseat A</div>
+                      <div class="crm-b crm-ts">Tripleseat B</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="proj-info">
+              <div class="proj-head">
+                <div class="proj-type">Cloud · Serverless · Platform</div>
+                <div class="proj-title">Multi-venue integration platform</div>
+              </div>
+              <div class="proj-metric">20+ brands · 6 integrations</div>
+            </div>
+          </a>
+
+          <a class="proj-card" href="project-flowmersion.html">
+            <div class="proj-cover">
+              <div class="proj-cover-inner">
+                <div class="cover-flow">
+                  <img
+                    src="flowmersion-demo.gif"
+                    alt="Flowmersion — XR snowsports platform demo"
+                    style="
+                      width: 100%;
+                      height: 100%;
+                      object-fit: cover;
+                      object-position: center;
+                    "
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="proj-info">
+              <div class="proj-head">
+                <div class="proj-type">Product Engineering · 0→1</div>
+                <div class="proj-title">
+                  Flowmersion, XR snowsports platform
+                </div>
+              </div>
+              <div class="proj-metric">+40% flow completion</div>
+            </div>
+          </a>
+
+          <a class="proj-card" href="project-pipeline.html">
+            <div class="proj-cover">
+              <div class="proj-cover-inner">
+                <div class="cover-pipeline">
+                  <div class="pipe-diagram">
+                    <div class="pipe-row">
+                      <div class="pipe-node pn-trigger">
+                        <div class="pipe-dot"></div>
+                        EventBridge · cron
+                      </div>
+                      <div class="pipe-conn"></div>
+                      <div class="pipe-node pn-lambda">
+                        <div class="pipe-dot"></div>
+                        λ Lambda
+                      </div>
+                    </div>
+                    <div style="display: flex; padding-left: 1.5rem">
+                      <div class="pipe-conn-v"></div>
+                    </div>
+                    <div class="pipe-row">
+                      <div class="pipe-node pn-api">
+                        <div class="pipe-dot"></div>
+                        Meta Marketing API
+                      </div>
+                      <div class="pipe-conn"></div>
+                      <div class="pipe-node pn-api">
+                        <div class="pipe-dot"></div>
+                        HubSpot API
+                      </div>
+                    </div>
+                    <div style="display: flex; padding-left: 1.5rem">
+                      <div class="pipe-conn-v"></div>
+                    </div>
+                    <div class="pipe-row">
+                      <div class="pipe-node pn-store">
+                        <div class="pipe-dot"></div>
+                        S3 + DynamoDB
+                      </div>
+                      <div class="pipe-conn"></div>
+                      <div class="pipe-label">90-day retention</div>
+                    </div>
+                    <div style="display: flex; padding-left: 1.5rem">
+                      <div class="pipe-conn-v"></div>
+                    </div>
+                    <div class="pipe-row">
+                      <div class="pipe-node pn-ai">
+                        <div class="pipe-dot"></div>
+                        Claude API · 3-pass reasoning
+                      </div>
+                    </div>
+                    <div style="display: flex; padding-left: 1.5rem">
+                      <div class="pipe-conn-v"></div>
+                    </div>
+                    <div class="pipe-row">
+                      <div class="pipe-node pn-out">
+                        <div class="pipe-dot"></div>
+                        SES → 6 stakeholders
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="proj-info">
+              <div class="proj-head">
+                <div class="proj-type">Cloud · AI · Automation</div>
+                <div class="proj-title">Serverless ad-reporting pipeline</div>
+              </div>
+              <div class="proj-metric">~2 hrs saved / week</div>
+            </div>
+          </a>
+
+          <a class="proj-card" href="project-2.html">
+            <div class="proj-cover">
+              <div class="proj-cover-inner">
+                <div class="cover-nucee" style="height: 100%">
+                  <div
+                    style="
+                      width: 100%;
+                      max-width: 700px;
+                      display: flex;
+                      gap: 1.5rem;
+                      align-items: flex-start;
+                    "
+                  >
+                    <div class="schema-wrap" style="flex: 1.5">
+                      <div class="schema-tbl">
+                        <div class="schema-head">ventures</div>
+                        <div class="schema-field">
+                          <span>venture_id</span
+                          ><span class="schema-type">uuid PK</span>
+                        </div>
+                        <div class="schema-field">
+                          <span>program</span
+                          ><span class="schema-type">enum</span>
+                        </div>
+                        <div class="schema-field">
+                          <span>stage</span
+                          ><span class="schema-type">varchar</span>
+                        </div>
+                        <div class="schema-field">
+                          <span>funding_raised</span
+                          ><span class="schema-type">decimal</span>
+                        </div>
+                      </div>
+                      <div class="schema-tbl">
+                        <div class="schema-head">mentors</div>
+                        <div class="schema-field">
+                          <span>mentor_id</span
+                          ><span class="schema-type">uuid PK</span>
+                        </div>
+                        <div class="schema-field">
+                          <span>venture_id</span
+                          ><span class="schema-type">FK →</span>
+                        </div>
+                        <div class="schema-field">
+                          <span>sessions</span
+                          ><span class="schema-type">int</span>
+                        </div>
+                        <div class="schema-field">
+                          <span>program</span
+                          ><span class="schema-type">enum</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="schema-stat" style="flex: 1">
+                      <div
+                        class="schema-s"
+                        style="
+                          margin-top: 0.75rem;
+                          opacity: 0.6;
+                          font-size: 0.58rem;
+                        "
+                      >
+                        Salesforce · Airtable · Chronus<br />Tableau · Jupyter ·
+                        Excel
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="proj-info">
+              <div class="proj-head">
+                <div class="proj-type">Data Systems · Program Management</div>
+                <div class="proj-title">
+                  NUCEE data &amp; impact infrastructure
+                </div>
+              </div>
+              <div class="proj-metric">8,000+ students</div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience" class="section">
+      <div class="exp-layout">
+        <div class="reveal">
+          <div class="s-label">Experience</div>
+          <h2
+            style="
+              font-family: var(--serif);
+              font-size: clamp(1.5rem, 2.5vw, 2rem);
+              font-weight: 400;
+              color: var(--ink);
+              letter-spacing: -0.02em;
+              margin-bottom: 2rem;
+            "
+          >
+            Where I've worked.
+          </h2>
+          <div class="exp-nav" id="expNav">
+            <div class="exp-tab on" onclick="se('ws',this)">
+              <div class="et-role">Developer</div>
+              <div class="et-org">Waterside Group</div>
+              <div class="et-date">Jan – Jul 2026</div>
+            </div>
+            <div class="exp-tab" onclick="se('sc',this)">
+              <div class="et-role">Product Lead</div>
+              <div class="et-org">Scout</div>
+              <div class="et-date">Aug 2025 – May 2026</div>
+            </div>
+            <div class="exp-tab" onclick="se('nu',this)">
+              <div class="et-role">Data &amp; Impact Fellow</div>
+              <div class="et-org">NUCEE, Northeastern</div>
+              <div class="et-date">Jan – Aug 2025</div>
+            </div>
+            <div class="exp-tab" onclick="se('as',this)">
+              <div class="et-role">Data Analyst</div>
+              <div class="et-org">Aspire Institute</div>
+              <div class="et-date">Apr – May 2024</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="exp-panels reveal d2">
+          <div id="ep-ws" class="on">
+            <div class="ep-role">Developer</div>
+            <div class="ep-org">Waterside Group · Boston, MA</div>
+            <div class="ep-date">January 2026 – July 2026</div>
+            <ul class="ep-list">
+              <li>
+                Shipped a serverless Meta Ads reporting pipeline on AWS
+                (EventBridge, Lambda, Meta and HubSpot APIs, S3/DynamoDB, Claude
+                API, SES): automated weekly reports with 4-week trend analysis
+                to 6 stakeholders.
+              </li>
+              <li>
+                Built a 17-property website audit system (Python Lambda,
+                EventBridge, S3/DynamoDB, Claude summaries, SES) that surfaces
+                SSL issues, broken links, and content gaps for ~$15–25 a month.
+              </li>
+              <li>
+                Sole owner of multi-client CRM integrations: built a Basecamp
+                Brewing to Tripleseat polling Lambda, rebuilt the Harbor Lights
+                to Tripleseat sync from a vendor codebase, and scoped a Marina
+                to Molo integration.
+              </li>
+              <li>
+                Shipped a production AI chatbot on AWS Bedrock (Claude Haiku)
+                for Longfellow Design Build: Lambda, API Gateway, DynamoDB
+                sessions, lead scoring, and a JS widget embed.
+              </li>
+              <li>
+                Built a Python pipeline that extracts historical customer
+                records from Excel, Word, and PDF, using consensus-based field
+                resolution across 4 iterations.
+              </li>
+            </ul>
+            <div class="ep-tools">
+              <span class="ep-tool">Lambda</span
+              ><span class="ep-tool">EventBridge</span
+              ><span class="ep-tool">DynamoDB</span
+              ><span class="ep-tool">S3</span
+              ><span class="ep-tool">API Gateway</span
+              ><span class="ep-tool">SES</span
+              ><span class="ep-tool">Bedrock</span
+              ><span class="ep-tool">CloudWatch</span
+              ><span class="ep-tool">Secrets Manager</span
+              ><span class="ep-tool">IAM</span
+              ><span class="ep-tool">Python</span
+              ><span class="ep-tool">HubSpot API</span
+              ><span class="ep-tool">Meta API</span
+              ><span class="ep-tool">Tripleseat API</span>
+            </div>
+          </div>
+
+          <div id="ep-sc">
+            <div class="ep-role">Product Lead</div>
+            <div class="ep-org">Scout · Boston, MA</div>
+            <div class="ep-date">August 2025 – May 2026</div>
+            <ul class="ep-list">
+              <li>
+                Delivered a 6-page mobile-first website for an analytics-device
+                and XR-simulator client, with pre-order flows, community
+                onboarding, and in-site data capture.
+              </li>
+              <li>
+                Ran weekly sprints for a 10+ person cross-functional team,
+                improving delivery timelines 25% and establishing a stable repo
+                architecture.
+              </li>
+              <li>
+                Standardized CTAs and user flows across all pages, cutting
+                sign-up friction 40%.
+              </li>
+              <li>
+                Led a brand refresh and translated user-behavior insights into
+                engineering requirements that increased feature adoption.
+              </li>
+            </ul>
+            <div class="ep-tools">
+              <span class="ep-tool">Agile Sprints</span
+              ><span class="ep-tool">Mobile-first</span
+              ><span class="ep-tool">User Flows</span
+              ><span class="ep-tool">Roadmapping</span
+              ><span class="ep-tool">Cross-functional Coordination</span
+              ><span class="ep-tool">Git</span>
+            </div>
+          </div>
+
+          <div id="ep-nu">
+            <div class="ep-role">Data &amp; Impact Fellow</div>
+            <div class="ep-org">
+              NU Center for Entrepreneurship Education · Boston, MA
+            </div>
+            <div class="ep-date">January 2025 – August 2025</div>
+            <ul class="ep-list">
+              <li>
+                Led FY25 impact reporting across VMN, IDEA, and Mosaic, owning
+                the full pipeline from collection and validation to
+                visualization and delivery for 8,000+ students across three
+                programs.
+              </li>
+              <li>
+                Scoped and documented NUCEE's first data strategy: workflows,
+                data dictionaries, and onboarding guides that cut retrieval time
+                50% and created a repeatable system for future co-ops.
+              </li>
+              <li>
+                Directed data migration and an operations redesign for an
+                affiliated org, rebuilding mentor and student tracking for 300+
+                mentors and 500+ students on a new platform.
+              </li>
+              <li>
+                Redesigned Princeton Review data collection after 20+ years,
+                introducing documented, scalable reporting for Northeastern's
+                national rankings submission.
+              </li>
+            </ul>
+            <div class="ep-tools">
+              <span class="ep-tool">Airtable</span
+              ><span class="ep-tool">Salesforce</span
+              ><span class="ep-tool">Tableau</span
+              ><span class="ep-tool">Chronus</span
+              ><span class="ep-tool">Jupyter</span
+              ><span class="ep-tool">Excel</span
+              ><span class="ep-tool">Data Modeling</span
+              ><span class="ep-tool">Stakeholder Reporting</span>
+            </div>
+          </div>
+
+          <div id="ep-as">
+            <div class="ep-role">Data Analyst</div>
+            <div class="ep-org">Aspire Institute · Remote</div>
+            <div class="ep-date">April 2024 – May 2024</div>
+            <ul class="ep-list">
+              <li>
+                Analyzed alumni newsletter and digest performance (click rates,
+                open rates, content engagement) across multiple send cycles to
+                identify retention drivers.
+              </li>
+              <li>
+                Built dashboards in Tableau, Excel, and Google Sheets and
+                presented strategy recommendations to the Aspire team.
+              </li>
+              <li>
+                Worked with 2 analysts on a unified report that contributed to
+                an 18% improvement in alumni retention.
+              </li>
+            </ul>
+            <div class="ep-tools">
+              <span class="ep-tool">Python</span
+              ><span class="ep-tool">Tableau</span
+              ><span class="ep-tool">Excel</span
+              ><span class="ep-tool">Google Sheets</span
+              ><span class="ep-tool">Data Visualization</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="contact-inner">
+        <div class="reveal">
+          <div class="s-label" style="color: rgba(255, 255, 255, 0.25)">
+            <span
+              style="
+                background: rgba(255, 255, 255, 0.2);
+                flex-shrink: 0;
+                display: block;
+                width: 18px;
+                height: 1px;
+              "
+            ></span>
+            Get in touch
+          </div>
+          <h2 class="contact-h">Open to new<br /><em>opportunities.</em></h2>
+          <p class="contact-sub">
+            Full-time roles in cloud, platform engineering, and technical
+            product. California or remote.
+          </p>
+          <div class="contact-links">
+            <a class="contact-row" href="mailto:jayashankar.v@northeastern.edu"
+              ><span class="cr-label">Email</span
+              ><span class="cr-val">jayashankar.v@northeastern.edu ↗</span></a
+            >
+            <a
+              class="contact-row"
+              href="https://linkedin.com/in/vaishavijay"
+              target="_blank"
+              ><span class="cr-label">LinkedIn</span
+              ><span class="cr-val">linkedin.com/in/vaishavijay ↗</span></a
+            >
+            <a
+              class="contact-row"
+              href="Jayashankar_Vaishavi_Resume.pdf"
+              target="_blank"
+              ><span class="cr-label">Resume</span
+              ><span class="cr-val">Download PDF ↗</span></a
+            >
+          </div>
+        </div>
+        <div class="contact-right reveal d2">
+          <div class="status-pill">
+            <div class="status-dot"></div>
+            Open to full-time · new grad, May 2027
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="f-copy">© 2026 Vaishavi Jay</div>
+      <div class="f-links">
+        <a href="#work">Work</a>
+        <a href="#experience">Experience</a>
+        <a href="mailto:jayashankar.v@northeastern.edu">Email</a>
+      </div>
+    </footer>
+
+    <script>
+      /* Nav fill on scroll */
+      const nav = document.getElementById("nav");
+      window.addEventListener(
+        "scroll",
+        () => nav.classList.toggle("filled", scrollY > 50),
+        { passive: true },
+      );
+
+      /* Scroll reveal */
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add("in");
+              io.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.07, rootMargin: "0px 0px -30px 0px" },
+      );
+      document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+
+      /* Experience tabs */
+      function se(id, tab) {
+        document
+          .querySelectorAll(".exp-tab")
+          .forEach((t) => t.classList.remove("on"));
+        document
+          .querySelectorAll(".exp-panels > div")
+          .forEach((p) => p.classList.remove("on"));
+        tab.classList.add("on");
+        document.getElementById("ep-" + id).classList.add("on");
+      }
+
+      /* Mobile menu */
+      document
+        .getElementById("burger")
+        .addEventListener("click", () =>
+          document.getElementById("mob").classList.toggle("open"),
+        );
+      function cm() {
+        document.getElementById("mob").classList.remove("open");
+      }
+    </script>
+  </body>
+</html>

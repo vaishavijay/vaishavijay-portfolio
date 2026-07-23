@@ -1,0 +1,1498 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vaishavi Jay · Multi-Venue Serverless Integration Platform</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --white: #ffffff;
+        --off: #f8f7f5;
+        --border: #e8e6e1;
+        --muted: #a8a39b;
+        --mid: #6b6560;
+        --body: #2a2520;
+        --ink: #111109;
+        --accent: #5c7052;
+        --gold: #a9884f;
+        --dark: #0f1117;
+        --serif: "Space Grotesk", system-ui, sans-serif;
+        --sans: "Inter", system-ui, sans-serif;
+        --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+        --ease: cubic-bezier(0.16, 1, 0.3, 1);
+        --w: 720px;
+        --gx: clamp(1.5rem, 5vw, 4rem);
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background: var(--white);
+        color: var(--body);
+        font-family: var(--sans);
+        font-size: 16px;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        padding: 1.25rem var(--gx);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(14px);
+        border-bottom: 1px solid var(--border);
+      }
+
+      .n-logo {
+        font-family: var(--serif);
+        font-size: 1rem;
+        color: var(--ink);
+      }
+
+      .n-back {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        font-size: 0.8rem;
+        color: var(--mid);
+        transition: color 0.2s;
+      }
+
+      .n-back:hover {
+        color: var(--ink);
+      }
+
+      .hero {
+        max-width: calc(var(--w) + var(--gx) * 2);
+        margin: 0 auto;
+        padding: 6.5rem var(--gx) 2.5rem;
+      }
+
+      .owner-strip {
+        display: flex;
+        align-items: center;
+        gap: 0.65rem;
+        flex-wrap: wrap;
+        margin-bottom: 1.1rem;
+      }
+
+      .owner-badge {
+        font-family: var(--mono);
+        font-size: 0.62rem;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+        padding: 0.3rem 0.7rem;
+        border-radius: 3px;
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+      }
+
+      .ob-dx {
+        background: rgba(92, 112, 82, 0.1);
+        color: var(--accent);
+        border: 1px solid rgba(92, 112, 82, 0.25);
+      }
+
+      .ob-owner {
+        background: rgba(15, 17, 23, 0.06);
+        color: var(--body);
+        border: 1px solid var(--border);
+      }
+
+      .ob-prod {
+        background: #0f1117;
+        color: rgba(255, 255, 255, 0.7);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .ob-dot {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: #5cbf56;
+        flex-shrink: 0;
+      }
+
+      .hero-title {
+        font-family: var(--serif);
+        font-size: clamp(2.4rem, 5.5vw, 4rem);
+        font-weight: 400;
+        color: var(--ink);
+        line-height: 1.04;
+        letter-spacing: -0.03em;
+        margin-bottom: 1.25rem;
+      }
+
+      .hero-title em {
+        font-style: normal;
+        color: var(--accent);
+      }
+
+      .hero-lede {
+        font-size: 1rem;
+        color: var(--mid);
+        line-height: 1.8;
+        margin-bottom: 2rem;
+      }
+
+      .hero-lede strong {
+        color: var(--body);
+        font-weight: 500;
+      }
+
+      .impact-strip {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1px;
+        background: var(--border);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        overflow: hidden;
+        margin-bottom: 2rem;
+      }
+
+      .impact-cell {
+        background: var(--white);
+        padding: 1.5rem 1.25rem;
+      }
+
+      .impact-val {
+        font-family: var(--serif);
+        font-size: 2.6rem;
+        font-weight: 400;
+        color: var(--ink);
+        line-height: 1;
+        letter-spacing: -0.03em;
+        margin-bottom: 0.3rem;
+      }
+
+      .impact-label {
+        font-size: 0.78rem;
+        color: var(--mid);
+        line-height: 1.4;
+      }
+
+      .meta-strip {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        border-top: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+        margin-bottom: 3rem;
+      }
+
+      .meta-item {
+        padding: 1rem 0;
+        border-right: 1px solid var(--border);
+        padding-right: 1.5rem;
+        margin-right: 1.5rem;
+      }
+
+      .meta-item:last-child {
+        border-right: none;
+        padding-right: 0;
+        margin-right: 0;
+      }
+
+      .meta-label {
+        font-family: var(--mono);
+        font-size: 0.56rem;
+        color: var(--muted);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-bottom: 0.35rem;
+      }
+
+      .meta-val {
+        font-size: 0.82rem;
+        color: var(--body);
+        line-height: 1.4;
+      }
+
+      /* ARCHITECTURE DIAGRAM */
+      .arch-wrap {
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        overflow: hidden;
+        margin-bottom: 3rem;
+      }
+
+      .arch-header {
+        background: var(--off);
+        padding: 1rem 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .arch-header-label {
+        font-family: var(--mono);
+        font-size: 0.58rem;
+        color: var(--muted);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .arch-header-chips {
+        display: flex;
+        gap: 0.4rem;
+      }
+
+      .arch-chip {
+        font-family: var(--mono);
+        font-size: 0.55rem;
+        color: var(--mid);
+        border: 1px solid var(--border);
+        padding: 0.15rem 0.45rem;
+        border-radius: 3px;
+        background: var(--white);
+      }
+
+      .arch-svg-wrap {
+        padding: 1.5rem;
+        overflow-x: auto;
+      }
+
+      /* CODE BLOCK */
+      .code-block {
+        background: var(--dark);
+        border-radius: 8px;
+        padding: 0;
+        margin: 1.5rem 0;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+      }
+
+      .code-topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.75rem 1.25rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      }
+
+      .code-filename {
+        font-family: var(--mono);
+        font-size: 0.6rem;
+        color: rgba(255, 255, 255, 0.35);
+        letter-spacing: 0.06em;
+      }
+
+      .code-lang {
+        font-family: var(--mono);
+        font-size: 0.55rem;
+        color: rgba(92, 112, 82, 0.8);
+        background: rgba(92, 112, 82, 0.1);
+        border: 1px solid rgba(92, 112, 82, 0.2);
+        padding: 0.1rem 0.4rem;
+        border-radius: 3px;
+      }
+
+      .code-body {
+        padding: 1.25rem 1.5rem;
+        font-family: var(--mono);
+        font-size: 0.72rem;
+        line-height: 1.8;
+        color: rgba(255, 255, 255, 0.6);
+        overflow-x: auto;
+        white-space: pre;
+      }
+
+      .code-body .c-kw {
+        color: #c4a0f0;
+      }
+
+      .code-body .c-fn {
+        color: #7fa8e8;
+      }
+
+      .code-body .c-str {
+        color: #8bc88b;
+      }
+
+      .code-body .c-cmt {
+        color: rgba(255, 255, 255, 0.25);
+        font-style: italic;
+      }
+
+      .code-body .c-num {
+        color: #e8952a;
+      }
+
+      .code-body .c-var {
+        color: rgba(255, 255, 255, 0.8);
+      }
+
+      .body-wrap {
+        max-width: calc(var(--w) + var(--gx) * 2);
+        margin: 0 auto;
+        padding: 0 var(--gx) 5rem;
+      }
+
+      .cs-sec {
+        margin-bottom: 2.75rem;
+      }
+
+      .cs-sec-label {
+        font-family: var(--mono);
+        font-size: 0.62rem;
+        color: var(--accent);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        margin-bottom: 0.65rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .cs-sec-label::before {
+        content: "";
+        width: 14px;
+        height: 1px;
+        background: var(--gold);
+      }
+
+      .cs-h2 {
+        font-family: var(--serif);
+        font-size: clamp(1.3rem, 2.5vw, 1.75rem);
+        font-weight: 400;
+        color: var(--ink);
+        letter-spacing: -0.02em;
+        line-height: 1.2;
+        margin-bottom: 1rem;
+      }
+
+      .cs-p {
+        font-size: 0.95rem;
+        color: var(--mid);
+        line-height: 1.8;
+        margin-bottom: 0.85rem;
+      }
+
+      .cs-p:last-child {
+        margin-bottom: 0;
+      }
+
+      .cs-p strong {
+        color: var(--body);
+        font-weight: 500;
+      }
+
+      .cs-hr {
+        height: 1px;
+        background: var(--border);
+        margin: 2.75rem 0;
+      }
+
+      .decision {
+        border-left: 2px solid var(--border);
+        padding: 1rem 1.25rem;
+        background: var(--off);
+        border-radius: 0 4px 4px 0;
+        margin: 1.25rem 0;
+        transition: border-left-color 0.2s;
+      }
+
+      .decision:hover {
+        border-left-color: var(--accent);
+      }
+
+      .decision-label {
+        font-family: var(--mono);
+        font-size: 0.58rem;
+        color: var(--accent);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-bottom: 0.35rem;
+      }
+
+      .decision-text {
+        font-size: 0.875rem;
+        color: var(--body);
+        line-height: 1.65;
+      }
+
+      .decision-text strong {
+        font-weight: 500;
+      }
+
+      code {
+        font-family: var(--mono);
+        font-size: 0.8rem;
+        color: var(--body);
+        background: var(--off);
+        border: 1px solid var(--border);
+        padding: 0.1rem 0.35rem;
+        border-radius: 3px;
+      }
+
+      .steps {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .step {
+        display: grid;
+        grid-template-columns: 2.5rem 1fr;
+        gap: 0.75rem;
+        padding: 1.1rem 0;
+        border-top: 1px solid var(--border);
+      }
+
+      .step:last-child {
+        border-bottom: 1px solid var(--border);
+      }
+
+      .step-num {
+        font-family: var(--mono);
+        font-size: 0.6rem;
+        color: var(--muted);
+        padding-top: 0.2rem;
+      }
+
+      .step-title {
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--ink);
+        margin-bottom: 0.3rem;
+      }
+
+      .step-body {
+        font-size: 0.84rem;
+        color: var(--mid);
+        line-height: 1.65;
+      }
+
+      .step-body strong {
+        color: var(--body);
+        font-weight: 500;
+      }
+
+      .timeline {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+      }
+
+      .tl-row {
+        display: grid;
+        grid-template-columns: 5.5rem 1fr;
+        gap: 1rem;
+        padding: 0.9rem 0;
+        border-top: 1px solid var(--border);
+      }
+
+      .tl-row:last-child {
+        border-bottom: 1px solid var(--border);
+      }
+
+      .tl-date {
+        font-family: var(--mono);
+        font-size: 0.62rem;
+        color: var(--muted);
+        padding-top: 0.15rem;
+      }
+
+      .tl-text {
+        font-size: 0.875rem;
+        color: var(--mid);
+        line-height: 1.65;
+      }
+
+      .tl-text strong {
+        color: var(--body);
+        font-weight: 500;
+      }
+
+      .next-bar {
+        border-top: 1px solid var(--border);
+        max-width: calc(var(--w) + var(--gx) * 2);
+        margin: 0 auto;
+        padding: 2.5rem var(--gx);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 2rem;
+      }
+
+      .next-label {
+        font-family: var(--mono);
+        font-size: 0.6rem;
+        color: var(--muted);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-bottom: 0.4rem;
+      }
+
+      .next-title {
+        font-family: var(--serif);
+        font-size: 1.35rem;
+        color: var(--ink);
+        letter-spacing: -0.015em;
+      }
+
+      .next-arrow {
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        border: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--mid);
+        flex-shrink: 0;
+        transition:
+          background 0.2s,
+          border-color 0.2s,
+          color 0.2s,
+          transform 0.25s var(--ease);
+      }
+
+      .next-arrow:hover {
+        background: var(--ink);
+        border-color: var(--ink);
+        color: var(--white);
+        transform: rotate(45deg);
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(16px);
+        transition:
+          opacity 0.65s var(--ease),
+          transform 0.65s var(--ease);
+      }
+
+      .reveal.in {
+        opacity: 1;
+        transform: none;
+      }
+
+      .d1 {
+        transition-delay: 0.1s;
+      }
+
+      .d2 {
+        transition-delay: 0.2s;
+      }
+
+      .d3 {
+        transition-delay: 0.3s;
+      }
+
+      @media (max-width: 600px) {
+        .impact-strip {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        .impact-cell:last-child {
+          grid-column: 1 / -1;
+          border-top: 1px solid var(--border);
+        }
+
+        .meta-strip {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        .meta-item {
+          border-bottom: 1px solid var(--border);
+          padding: 0.85rem 0;
+          border-right: none;
+          margin-right: 0;
+        }
+
+        .meta-item:nth-child(odd) {
+          padding-right: 1rem;
+          border-right: 1px solid var(--border);
+        }
+
+        .tl-row {
+          grid-template-columns: 1fr;
+        }
+
+        .tl-date {
+          margin-bottom: -0.25rem;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <nav>
+      <a href="home.html" class="n-logo">Vaishavi Jay</a>
+      <a href="home.html#" class="n-back">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path
+            d="M13 7H1M6.5 2L2 7l4.5 5"
+            stroke="currentColor"
+            stroke-width="1.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+        All Work
+      </a>
+    </nav>
+
+    <div class="hero">
+      <div class="owner-strip reveal">
+        <span class="owner-badge ob-dx">Cloud · Serverless</span>
+        <span class="owner-badge ob-owner">Technical Owner</span>
+        <span class="owner-badge ob-prod"
+          ><span class="ob-dot"></span>Production</span
+        >
+      </div>
+
+      <h1 class="hero-title reveal d1">
+        Multi-Venue Serverless<br /><em>Integration Platform</em>
+      </h1>
+      <p class="hero-lede reveal d2">
+        Designed and owned a serverless integration platform on AWS for a 20+
+        brand hospitality portfolio running on a single HubSpot CRM. I built and
+        ran multiple production integrations across scheduled and webhook
+        patterns, managed live sync state in DynamoDB, led incident response on
+        two production data bugs, and cut stale infrastructure out of the
+        account.
+      </p>
+
+      <div class="impact-strip reveal d2">
+        <div class="impact-cell">
+          <div class="impact-val">20+</div>
+          <div class="impact-label">
+            Brands on one HubSpot portal and one AWS account
+          </div>
+        </div>
+        <div class="impact-cell">
+          <div class="impact-val">6</div>
+          <div class="impact-label">
+            Production serverless integrations built and owned
+          </div>
+        </div>
+        <div class="impact-cell">
+          <div class="impact-val">4,600+</div>
+          <div class="impact-label">
+            Marina contacts synced automatically every 12 hours
+          </div>
+        </div>
+      </div>
+
+      <div class="meta-strip reveal d3">
+        <div class="meta-item">
+          <div class="meta-label">Role</div>
+          <div class="meta-val">Developer Co-op · Technical Owner</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Timeline</div>
+          <div class="meta-val">Jan – Jul 2026</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Organization</div>
+          <div class="meta-val">Boston-based hospitality group</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Stack</div>
+          <div class="meta-val">
+            AWS Lambda · EventBridge · API Gateway · DynamoDB · Secrets Manager
+            · IAM · CloudWatch · HubSpot / Tripleseat / Molo / D-Tools APIs
+          </div>
+        </div>
+      </div>
+
+      <!-- ARCHITECTURE DIAGRAM — platform overview -->
+      <div class="arch-wrap reveal">
+        <div class="arch-header">
+          <div class="arch-header-label">
+            Platform architecture · Two ingress patterns, one HubSpot portal
+          </div>
+          <div class="arch-header-chips">
+            <span class="arch-chip">Scheduled</span>
+            <span class="arch-chip">Webhook</span>
+            <span class="arch-chip">DynamoDB</span>
+          </div>
+        </div>
+        <div class="arch-svg-wrap">
+          <svg
+            viewBox="0 0 640 300"
+            xmlns="http://www.w3.org/2000/svg"
+            style="
+              width: 100%;
+              max-width: 640px;
+              display: block;
+              font-family: &quot;DM Mono&quot;, monospace;
+            "
+          >
+            <!-- Trigger row -->
+            <rect
+              x="30"
+              y="18"
+              width="250"
+              height="40"
+              rx="5"
+              fill="#EBF5EB"
+              stroke="#B8D9B8"
+              stroke-width="1"
+            />
+            <text
+              x="45"
+              y="37"
+              font-size="9"
+              fill="#2D6B2D"
+              font-family="'DM Mono',monospace"
+            >
+              EventBridge Scheduler
+            </text>
+            <text
+              x="45"
+              y="50"
+              font-size="7.5"
+              fill="#2D6B2D"
+              opacity=".6"
+              font-family="'DM Mono',monospace"
+            >
+              scheduled · rate(12h) + 5-min polls
+            </text>
+
+            <rect
+              x="360"
+              y="18"
+              width="250"
+              height="40"
+              rx="5"
+              fill="#FFF5EF"
+              stroke="#FFD5B3"
+              stroke-width="1"
+            />
+            <text
+              x="375"
+              y="37"
+              font-size="9"
+              fill="#B85200"
+              font-family="'DM Mono',monospace"
+            >
+              API Gateway · oo822zhp14
+            </text>
+            <text
+              x="375"
+              y="50"
+              font-size="7.5"
+              fill="#B85200"
+              opacity=".6"
+              font-family="'DM Mono',monospace"
+            >
+              webhook · POST /prod
+            </text>
+
+            <!-- trigger to lambda lines -->
+            <line
+              x1="155"
+              y1="58"
+              x2="93"
+              y2="104"
+              stroke="#B8D9B8"
+              stroke-width="1.5"
+              stroke-dasharray="4 3"
+            />
+            <line
+              x1="485"
+              y1="58"
+              x2="244"
+              y2="104"
+              stroke="#FFD5B3"
+              stroke-width="1.5"
+              stroke-dasharray="4 3"
+            />
+            <line
+              x1="485"
+              y1="58"
+              x2="396"
+              y2="104"
+              stroke="#FFD5B3"
+              stroke-width="1.5"
+              stroke-dasharray="4 3"
+            />
+
+            <!-- lambda row -->
+            <rect
+              x="24"
+              y="104"
+              width="138"
+              height="48"
+              rx="5"
+              fill="#111109"
+              stroke="rgba(255,255,255,.12)"
+              stroke-width="1"
+            />
+            <text
+              x="93"
+              y="124"
+              font-size="8"
+              fill="rgba(255,255,255,.8)"
+              text-anchor="middle"
+              font-family="'DM Mono',monospace"
+            >
+              molo sync
+            </text>
+            <text
+              x="93"
+              y="137"
+              font-size="7"
+              fill="rgba(255,255,255,.35)"
+              text-anchor="middle"
+              font-family="'DM Mono',monospace"
+            >
+              EventBridge · 12h
+            </text>
+
+            <rect
+              x="175"
+              y="104"
+              width="138"
+              height="48"
+              rx="5"
+              fill="#111109"
+              stroke="rgba(92,112,82,.35)"
+              stroke-width="1"
+            />
+            <circle cx="190" cy="118" r="3" fill="#5CBF56" opacity=".8" />
+            <text
+              x="244"
+              y="124"
+              font-size="8"
+              fill="rgba(255,255,255,.8)"
+              text-anchor="middle"
+              font-family="'DM Mono',monospace"
+            >
+              tripleseat sync
+            </text>
+            <text
+              x="244"
+              y="137"
+              font-size="7"
+              fill="rgba(255,255,255,.35)"
+              text-anchor="middle"
+              font-family="'DM Mono',monospace"
+            >
+              API Gateway · deals
+            </text>
+
+            <rect
+              x="327"
+              y="104"
+              width="138"
+              height="48"
+              rx="5"
+              fill="#111109"
+              stroke="rgba(255,255,255,.12)"
+              stroke-width="1"
+            />
+            <text
+              x="396"
+              y="124"
+              font-size="8"
+              fill="rgba(255,255,255,.8)"
+              text-anchor="middle"
+              font-family="'DM Mono',monospace"
+            >
+              d-tools sync
+            </text>
+            <text
+              x="396"
+              y="137"
+              font-size="7"
+              fill="rgba(255,255,255,.35)"
+              text-anchor="middle"
+              font-family="'DM Mono',monospace"
+            >
+              API Gateway · contacts
+            </text>
+
+            <rect
+              x="478"
+              y="104"
+              width="138"
+              height="48"
+              rx="5"
+              fill="#111109"
+              stroke="rgba(255,255,255,.12)"
+              stroke-width="1"
+            />
+            <text
+              x="547"
+              y="124"
+              font-size="8"
+              fill="rgba(255,255,255,.8)"
+              text-anchor="middle"
+              font-family="'DM Mono',monospace"
+            >
+              hubspot dedup
+            </text>
+            <text
+              x="547"
+              y="137"
+              font-size="7"
+              fill="rgba(255,255,255,.35)"
+              text-anchor="middle"
+              font-family="'DM Mono',monospace"
+            >
+              on-demand scan
+            </text>
+
+            <!-- dynamodb state under molo -->
+            <line
+              x1="93"
+              y1="152"
+              x2="93"
+              y2="172"
+              stroke="#E8E6E1"
+              stroke-width="1.5"
+              stroke-dasharray="4 3"
+            />
+            <rect
+              x="24"
+              y="172"
+              width="138"
+              height="30"
+              rx="5"
+              fill="#F8F7F5"
+              stroke="#E8E6E1"
+              stroke-width="1"
+            />
+            <text
+              x="93"
+              y="185"
+              font-size="8"
+              fill="#6B6560"
+              text-anchor="middle"
+              font-family="'DM Mono',monospace"
+            >
+              DynamoDB
+            </text>
+            <text
+              x="93"
+              y="196"
+              font-size="7"
+              fill="#A8A39B"
+              text-anchor="middle"
+              font-family="'DM Mono',monospace"
+            >
+              MD5 change-detection
+            </text>
+
+            <!-- lambda to hubspot lines -->
+            <line
+              x1="93"
+              y1="202"
+              x2="250"
+              y2="250"
+              stroke="rgba(15,17,23,.14)"
+              stroke-width="1.5"
+              stroke-dasharray="4 3"
+            />
+            <line
+              x1="244"
+              y1="152"
+              x2="300"
+              y2="250"
+              stroke="rgba(15,17,23,.14)"
+              stroke-width="1.5"
+              stroke-dasharray="4 3"
+            />
+            <line
+              x1="396"
+              y1="152"
+              x2="360"
+              y2="250"
+              stroke="rgba(15,17,23,.14)"
+              stroke-width="1.5"
+              stroke-dasharray="4 3"
+            />
+
+            <!-- dedup to s3 -->
+            <line
+              x1="547"
+              y1="152"
+              x2="547"
+              y2="250"
+              stroke="rgba(15,17,23,.14)"
+              stroke-width="1.5"
+              stroke-dasharray="4 3"
+            />
+
+            <!-- HubSpot hub -->
+            <rect
+              x="170"
+              y="250"
+              width="300"
+              height="40"
+              rx="5"
+              fill="#FFF5EF"
+              stroke="#FFD5B3"
+              stroke-width="1.5"
+            />
+            <text
+              x="320"
+              y="270"
+              font-size="9.5"
+              fill="#B85200"
+              text-anchor="middle"
+              font-family="'DM Mono',monospace"
+            >
+              HubSpot CRM
+            </text>
+            <text
+              x="320"
+              y="283"
+              font-size="7.5"
+              fill="#B85200"
+              opacity=".6"
+              text-anchor="middle"
+              font-family="'DM Mono',monospace"
+            >
+              one portal · 44586838 · 20+ brands
+            </text>
+
+            <!-- S3 -->
+            <rect
+              x="478"
+              y="250"
+              width="138"
+              height="40"
+              rx="5"
+              fill="#F8F7F5"
+              stroke="#E8E6E1"
+              stroke-width="1"
+            />
+            <text
+              x="547"
+              y="270"
+              font-size="8.5"
+              fill="#6B6560"
+              text-anchor="middle"
+              font-family="'DM Mono',monospace"
+            >
+              S3
+            </text>
+            <text
+              x="547"
+              y="283"
+              font-size="7"
+              fill="#A8A39B"
+              text-anchor="middle"
+              font-family="'DM Mono',monospace"
+            >
+              dedup report .xlsx
+            </text>
+
+            <!-- footer annotation -->
+            <text
+              x="320"
+              y="297"
+              font-size="7"
+              fill="#A8A39B"
+              text-anchor="middle"
+              font-family="'DM Mono',monospace"
+            >
+              Isolated Lambdas · Secrets Manager · IAM least-privilege ·
+              CloudWatch on every function
+            </text>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="body-wrap">
+      <div class="cs-sec reveal">
+        <div class="cs-sec-label">Context</div>
+        <h2 class="cs-h2">One HubSpot portal, one AWS account, 20+ brands.</h2>
+        <p class="cs-p">
+          The group runs 20+ hospitality, marine, and real-estate brands on a
+          single HubSpot CRM and a single AWS account in
+          <code>us-east-1</code>. Each brand ran different source systems, and
+          none of them fed HubSpot on their own.
+        </p>
+        <p class="cs-p">
+          I was the technical owner of the integration layer that connected
+          them. Over the co-op I built and ran six production serverless
+          integrations, moving contact and deal data between HubSpot and three
+          source systems (Molo, Tripleseat, and D-Tools) and running a
+          deduplication engine over HubSpot's own 56k+ contacts. No other
+          engineer was on the team, so I owned scoping, build, deploy, incident
+          response, and the handoff documentation.
+        </p>
+      </div>
+
+      <div class="cs-hr"></div>
+
+      <div class="cs-sec reveal">
+        <div class="cs-sec-label">Architecture</div>
+        <h2 class="cs-h2">Two ingress patterns, chosen per source system.</h2>
+        <p class="cs-p">
+          Every integration lands data in the same HubSpot portal, but the right
+          way to get it there depends on the source. I used two patterns, chosen
+          per system.
+        </p>
+
+        <div class="decision">
+          <div class="decision-label">Scheduled · EventBridge + DynamoDB</div>
+          <div class="decision-text">
+            Molo has no public API, so its sync is pull-based.
+            <code>EventBridge</code> triggers the
+            <code>flyingbridge-molo-hubspot-sync</code> Lambda every 12 hours.
+            The Lambda pulls contacts and vessels for three marinas, compares
+            each record against state in <code>DynamoDB</code>, and pushes only
+            what changed. The two Tripleseat lead syncs, for Harbor Lights and
+            Basecamp, use the same scheduled pattern on a 5-minute poll.
+          </div>
+        </div>
+
+        <div class="decision">
+          <div class="decision-label">Webhook · API Gateway</div>
+          <div class="decision-text">
+            Tripleseat and D-Tools both emit webhooks, so those syncs are
+            event-driven and near real time. The source system posts to
+            <code>API Gateway</code>, which proxies the raw event to a Lambda:
+            <code>harborlights-tripleseat-deal-sync</code> turns Tripleseat
+            bookings into HubSpot deals, and
+            <code>vineyard-dtools-hubspot-sync</code> turns D-Tools clients into
+            HubSpot contacts. The Lambda fetches the full record, then creates
+            or updates in HubSpot.
+          </div>
+        </div>
+
+        <div class="decision">
+          <div class="decision-label">On-demand · scan to S3</div>
+          <div class="decision-text">
+            The deduplication engine runs on demand against the full contact
+            base, categorizes duplicate groups, and writes a color-coded report
+            to <code>S3</code>. It defaults to a dry-run gate, so the merge API
+            is never called unless a run is explicitly flipped to live, because
+            merges are irreversible.
+          </div>
+        </div>
+      </div>
+
+      <div class="cs-hr"></div>
+
+      <div class="cs-sec reveal">
+        <div class="cs-sec-label">State &amp; Merge Logic</div>
+        <h2 class="cs-h2">Idempotent syncs that never clobber a record.</h2>
+        <p class="cs-p">
+          The scheduled Molo sync is the most stateful integration. A
+          third-party developer wrote the reverse-engineered Molo auth client; I
+          built everything around it: the AWS orchestration, the DynamoDB state
+          design, the change-detection, and the merge logic.
+        </p>
+        <p class="cs-p">
+          Each run computes an MD5 hash of a contact's synced fields and
+          compares it to the last hash stored in <code>DynamoDB</code>.
+          Unchanged contacts are skipped, so a run that pulls ~4,600 contacts
+          writes only the handful that actually changed. That keeps the sync
+          idempotent and well inside HubSpot's rate limits.
+        </p>
+        <p class="cs-p">
+          Writes go through a three-tier merge so an automated sync never
+          overwrites human-entered data.
+        </p>
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">01</div>
+            <div>
+              <div class="step-title">Semicolon-append, never overwrite</div>
+              <div class="step-body">
+                Multi-value fields like
+                <code>hs_all_assigned_business_unit_ids</code> and
+                <code>marina_brand_interest</code> get the new value appended to
+                whatever is already there, so a contact keeps every brand and
+                interest it has ever had.
+              </div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">02</div>
+            <div>
+              <div class="step-title">Only set if empty</div>
+              <div class="step-body">
+                Ownership and lifecycle fields such as
+                <code>hubspot_owner_id</code>, <code>hs_lead_status</code>, and
+                <code>lifecyclestage</code> are written only when the field is
+                blank, so the sync never reassigns a contact a human already
+                touched.
+              </div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">03</div>
+            <div>
+              <div class="step-title">Always overwrite</div>
+              <div class="step-body">
+                Source-of-truth fields like name, email, phone, vessel data, and
+                the Molo record IDs always take the latest value from Molo.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cs-hr"></div>
+
+      <div class="cs-sec reveal">
+        <div class="cs-sec-label">Code: change-detection core</div>
+        <h2 class="cs-h2">What each run does.</h2>
+        <p class="cs-p">
+          The core of each Molo run is small. Hash the record, compare it
+          against DynamoDB, skip if nothing changed, otherwise merge into
+          HubSpot and persist the new state for next time.
+        </p>
+
+        <div class="code-block">
+          <div class="code-topbar">
+            <span class="code-filename"
+              >lambda_function.py · Molo change-detection</span
+            >
+            <span class="code-lang">Python 3.12</span>
+          </div>
+          <div class="code-body">
+            <span class="c-kw">def</span>
+            <span class="c-fn">sync_contact</span>(<span class="c-var"
+              >contact</span
+            >, <span class="c-var">table</span>,
+            <span class="c-var">hubspot</span>):
+            <span class="c-cmt"
+              ># skip unchanged contacts: hash fields, compare to DynamoDB</span
+            >
+            <span class="c-var">data_hash</span> =
+            <span class="c-fn">md5</span>(<span class="c-fn">serialize</span
+            >(<span class="c-var">contact</span>)).<span class="c-fn"
+              >hexdigest</span
+            >() <span class="c-var">prior</span> =
+            <span class="c-var">table</span>.<span class="c-fn">get_item</span
+            >(<span class="c-var">Key</span>={<span class="c-str"
+              >"molo_contact_id"</span
+            >: <span class="c-var">contact</span>[<span class="c-str">"id"</span
+            >]}) <span class="c-kw">if</span>
+            <span class="c-var">prior</span>.<span class="c-fn">get</span>(<span
+              class="c-str"
+              >"Item"</span
+            >, {}).<span class="c-fn">get</span>(<span class="c-str"
+              >"data_hash"</span
+            >) == <span class="c-var">data_hash</span>:
+            <span class="c-kw">return</span>
+            <span class="c-str">"unchanged"</span>
+
+            <span class="c-cmt"
+              ># three-tier merge: append / set-if-empty / overwrite</span
+            >
+            <span class="c-var">hubspot</span>.<span class="c-fn"
+              >create_or_update_contact</span
+            >(<span class="c-var">contact</span>[<span class="c-str"
+              >"email"</span
+            >], <span class="c-fn">build_props</span>(<span class="c-var"
+              >contact</span
+            >))
+
+            <span class="c-cmt"
+              ># persist state so the next 12h run can diff against it</span
+            >
+            <span class="c-var">table</span>.<span class="c-fn">put_item</span
+            >(<span class="c-var">Item</span>={
+            <span class="c-str">"molo_contact_id"</span>:
+            <span class="c-var">contact</span>[<span class="c-str">"id"</span>],
+            <span class="c-str">"data_hash"</span>:
+            <span class="c-var">data_hash</span>,
+            <span class="c-str">"last_synced"</span>:
+            <span class="c-fn">now_iso</span>(), })
+            <span class="c-kw">return</span> <span class="c-str">"synced"</span>
+          </div>
+        </div>
+        <p class="cs-p" style="margin-top: 1rem">
+          The same append and set-if-empty merge rules are the default for every
+          integration on the platform, not just Molo. An automated write should
+          never be able to destroy data a person entered by hand.
+        </p>
+      </div>
+
+      <div class="cs-hr"></div>
+
+      <div class="cs-sec reveal">
+        <div class="cs-sec-label">Incident Response</div>
+        <h2 class="cs-h2">Two production incidents, two fixes that stuck.</h2>
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">01</div>
+            <div>
+              <div class="step-title">
+                Molo: 7 contacts overwritten during early testing
+              </div>
+              <div class="step-body">
+                Before the merge logic existed, an early Molo test run overwrote
+                Brands, Lead Status, and Lifecycle Stage on 7 real contacts. I
+                restored all 7 by hand from HubSpot property history, then built
+                the three-tier merge so a sync can never blanket-overwrite a
+                contact again. That incident is why the merge logic exists, and
+                it became the default pattern for every integration after it.
+              </div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">02</div>
+            <div>
+              <div class="step-title">
+                Harbor Lights: duplicate deals from a webhook race
+              </div>
+              <div class="step-body">
+                Harbor Lights staff reported duplicate deals in HubSpot. The
+                root cause was a race condition. Tripleseat fired
+                <code>UPDATE_BOOKING</code> and
+                <code>UPDATE_EVENT</code> webhooks at the same time, both Lambda
+                invocations searched HubSpot for the deal, both found nothing,
+                and both created one. I fixed it at the source by removing the
+                Update Event trigger from the webhook, so exactly one webhook
+                fires per booking action and the dedup search stays
+                authoritative.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cs-hr"></div>
+
+      <div class="cs-sec reveal">
+        <div class="cs-sec-label">Infrastructure Hygiene</div>
+        <h2 class="cs-h2">Neutralized the legacy stack before scaling.</h2>
+        <p class="cs-p">
+          A previous vendor had left two legacy Tripleseat sync Lambdas,
+          <code>tripleseat-prod-tripleseatWebhook</code> and
+          <code>tripleseat-prod-queueWorker</code>, running in the account. Once
+          my replacement was confirmed working, I disabled both by setting
+          Reserved Concurrency to 0 rather than deleting them, so they stopped
+          executing but stayed recoverable pending owner sign-off.
+        </p>
+        <p class="cs-p">
+          Across the platform I kept the operational surface tight. Each
+          integration is an isolated Lambda with its own credentials and
+          environment, IAM roles are scoped to least privilege (for example
+          <code>secretsmanager:GetSecretValue</code> limited to the
+          <code>waterside/*</code> prefix), credentials move toward
+          <code>Secrets Manager</code>, and every function logs to
+          <code>CloudWatch</code> for debugging.
+        </p>
+      </div>
+
+      <div class="cs-hr"></div>
+
+      <div class="cs-sec reveal">
+        <div class="cs-sec-label">Timeline</div>
+        <h2 class="cs-h2">What shipped, in order.</h2>
+        <div class="timeline">
+          <div class="tl-row">
+            <div class="tl-date">Mar 2026</div>
+            <div class="tl-text">
+              Scoped the Molo marina sync. Blocked on Molo API access, which the
+              vendor refused for smaller accounts.
+            </div>
+          </div>
+          <div class="tl-row">
+            <div class="tl-date">Apr 2026</div>
+            <div class="tl-text">
+              Built the Molo sync with DynamoDB change-detection and the
+              three-tier merge across three marinas. Caught and fixed the
+              7-contact overwrite incident. Ran a full sync of ~4,600 contacts
+              and enabled the EventBridge 12-hour schedule. Disabled the two
+              legacy Tripleseat Lambdas.
+            </div>
+          </div>
+          <div class="tl-row">
+            <div class="tl-date">May 2026</div>
+            <div class="tl-text">
+              Took the Harbor Lights Tripleseat deal sync live on API Gateway
+              webhooks. Diagnosed the duplicate-deal race condition and fixed it
+              in the webhook configuration.
+            </div>
+          </div>
+          <div class="tl-row">
+            <div class="tl-date">Jun 2026</div>
+            <div class="tl-text">
+              Shipped the D-Tools contact sync as a webhook into HubSpot, and
+              built the deduplication engine, which scanned 56,676 contacts and
+              categorized duplicate groups for a sales-team review.
+            </div>
+          </div>
+          <div class="tl-row">
+            <div class="tl-date">Jul 2026</div>
+            <div class="tl-text">
+              Wrote the platform handoff: a master index plus per-integration
+              deep dives covering architecture, credentials, and open items for
+              the next developer.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /body-wrap -->
+
+    <div class="next-bar reveal">
+      <div>
+        <div class="next-label">Next Project</div>
+        <div class="next-title">
+          NUCEE: Data Platform &amp; Impact Infrastructure
+        </div>
+      </div>
+      <a href="project-2.html" class="next-arrow">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path
+            d="M1 13L13 1M13 1H4M13 1v9"
+            stroke="currentColor"
+            stroke-width="1.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </a>
+    </div>
+
+    <script>
+      const io = new IntersectionObserver(
+        (e) => {
+          e.forEach((x) => {
+            if (x.isIntersecting) {
+              x.target.classList.add("in");
+              io.unobserve(x.target);
+            }
+          });
+        },
+        { threshold: 0.06, rootMargin: "0px 0px -24px 0px" },
+      );
+      document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+    </script>
+  </body>
+</html>
