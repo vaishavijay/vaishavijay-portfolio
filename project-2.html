@@ -1,0 +1,1480 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vaishavi Jay · NUCEE Data Platform</title>
+    <link rel="icon" href="favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --white: #ffffff;
+        --off: #f8f7f5;
+        --border: #e8e6e1;
+        --muted: #a8a39b;
+        --mid: #6b6560;
+        --body: #2a2520;
+        --ink: #111109;
+        --accent: #5c7052;
+        --gold: #a9884f;
+        --dark: #0f1117;
+        --serif: "Space Grotesk", system-ui, sans-serif;
+        --sans: "Inter", system-ui, sans-serif;
+        --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+        --ease: cubic-bezier(0.16, 1, 0.3, 1);
+        --w: 720px;
+        --gx: clamp(1.5rem, 5vw, 4rem);
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background: var(--white);
+        color: var(--body);
+        font-family: var(--sans);
+        font-size: 16px;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        padding: 1.25rem var(--gx);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: row-reverse;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(14px);
+        border-bottom: 1px solid var(--border);
+      }
+
+      .n-logo {
+        font-family: var(--serif);
+        font-size: 1rem;
+        color: var(--ink);
+      }
+
+      .n-back {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        font-size: 0.8rem;
+        color: var(--mid);
+        transition: color 0.2s;
+      }
+
+      .n-back:hover {
+        color: var(--ink);
+      }
+
+      .hero {
+        max-width: calc(var(--w) + var(--gx) * 2);
+        margin: 0 auto;
+        padding: 6.5rem var(--gx) 2.5rem;
+      }
+
+      .owner-strip {
+        display: flex;
+        align-items: center;
+        gap: 0.65rem;
+        flex-wrap: wrap;
+        margin-bottom: 1.1rem;
+      }
+
+      .owner-badge {
+        font-family: var(--mono);
+        font-size: 0.62rem;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+        padding: 0.3rem 0.7rem;
+        border-radius: 3px;
+      }
+
+      .ob-platform {
+        background: rgba(92, 112, 82, 0.1);
+        color: var(--accent);
+        border: 1px solid rgba(92, 112, 82, 0.25);
+      }
+
+      .ob-owner {
+        background: rgba(15, 17, 23, 0.06);
+        color: var(--body);
+        border: 1px solid var(--border);
+      }
+
+      .ob-scale {
+        background: rgba(100, 140, 220, 0.08);
+        color: #3a5ea0;
+        border: 1px solid rgba(100, 140, 220, 0.2);
+      }
+
+      .hero-title {
+        font-family: var(--serif);
+        font-size: clamp(2.4rem, 5.5vw, 4rem);
+        font-weight: 400;
+        color: var(--ink);
+        line-height: 1.04;
+        letter-spacing: -0.03em;
+        margin-bottom: 1.25rem;
+      }
+
+      .hero-title em {
+        font-style: normal;
+        color: var(--accent);
+      }
+
+      .hero-lede {
+        font-size: 1rem;
+        color: var(--mid);
+        line-height: 1.8;
+        margin-bottom: 2rem;
+      }
+
+      .hero-lede strong {
+        color: var(--body);
+        font-weight: 500;
+      }
+
+      .impact-strip {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1px;
+        background: var(--border);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        overflow: hidden;
+        margin-bottom: 2rem;
+      }
+
+      .impact-cell {
+        background: var(--white);
+        padding: 1.5rem 1.25rem;
+      }
+
+      .impact-val {
+        font-family: var(--serif);
+        font-size: 2.6rem;
+        font-weight: 400;
+        color: var(--ink);
+        line-height: 1;
+        letter-spacing: -0.03em;
+        margin-bottom: 0.3rem;
+      }
+
+      .impact-label {
+        font-size: 0.78rem;
+        color: var(--mid);
+        line-height: 1.4;
+      }
+
+      .meta-strip {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        border-top: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+        margin-bottom: 3rem;
+      }
+
+      .meta-item {
+        padding: 1rem 0;
+        border-right: 1px solid var(--border);
+        padding-right: 1.5rem;
+        margin-right: 1.5rem;
+      }
+
+      .meta-item:last-child {
+        border-right: none;
+        padding-right: 0;
+        margin-right: 0;
+      }
+
+      .meta-label {
+        font-family: var(--mono);
+        font-size: 0.56rem;
+        color: var(--muted);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-bottom: 0.35rem;
+      }
+
+      .meta-val {
+        font-size: 0.82rem;
+        color: var(--body);
+        line-height: 1.4;
+      }
+
+      /* PLATFORM VISUAL */
+      .platform-wrap {
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        overflow: hidden;
+        margin-bottom: 3rem;
+      }
+
+      .platform-header {
+        background: var(--off);
+        padding: 1rem 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .platform-header-label {
+        font-family: var(--mono);
+        font-size: 0.58rem;
+        color: var(--muted);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .platform-header-chips {
+        display: flex;
+        gap: 0.4rem;
+      }
+
+      .platform-chip {
+        font-family: var(--mono);
+        font-size: 0.55rem;
+        color: var(--mid);
+        border: 1px solid var(--border);
+        padding: 0.15rem 0.45rem;
+        border-radius: 3px;
+        background: var(--white);
+      }
+
+      .platform-svg-wrap {
+        padding: 1.5rem;
+        overflow-x: auto;
+      }
+
+      /* Schema visual */
+      .schema-wrap {
+        background: var(--off);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 2rem 2.25rem;
+        margin-bottom: 2rem;
+        font-family: var(--mono);
+      }
+
+      .schema-label {
+        font-size: 0.58rem;
+        color: var(--muted);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-bottom: 1.5rem;
+      }
+
+      .schema-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+      }
+
+      .schema-table {
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-radius: 5px;
+        overflow: hidden;
+      }
+
+      .schema-table-header {
+        background: var(--ink);
+        color: var(--white);
+        padding: 0.45rem 0.75rem;
+        font-size: 0.65rem;
+        font-weight: 400;
+        letter-spacing: 0.04em;
+      }
+
+      .schema-table-header span {
+        color: rgba(255, 255, 255, 0.4);
+        margin-left: 0.5rem;
+        font-size: 0.55rem;
+      }
+
+      .schema-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.35rem 0.75rem;
+        font-size: 0.6rem;
+        border-bottom: 1px solid var(--border);
+        color: var(--mid);
+      }
+
+      .schema-row:last-child {
+        border-bottom: none;
+      }
+
+      .schema-row .field {
+        color: var(--body);
+      }
+
+      .schema-row .type {
+        color: var(--muted);
+      }
+
+      .schema-pk {
+        font-size: 0.52rem;
+        color: var(--accent);
+        background: rgba(92, 112, 82, 0.1);
+        border: 1px solid rgba(92, 112, 82, 0.2);
+        padding: 0.05rem 0.3rem;
+        border-radius: 2px;
+        margin-left: 0.35rem;
+      }
+
+      .schema-fk {
+        font-size: 0.52rem;
+        color: #7a6030;
+        background: rgba(122, 96, 48, 0.1);
+        border: 1px solid rgba(122, 96, 48, 0.2);
+        padding: 0.05rem 0.3rem;
+        border-radius: 2px;
+        margin-left: 0.35rem;
+      }
+
+      .body-wrap {
+        max-width: calc(var(--w) + var(--gx) * 2);
+        margin: 0 auto;
+        padding: 0 var(--gx) 5rem;
+      }
+
+      .cs-sec {
+        margin-bottom: 2.75rem;
+      }
+
+      .cs-sec-label {
+        font-family: var(--mono);
+        font-size: 0.62rem;
+        color: var(--accent);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        margin-bottom: 0.65rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .cs-sec-label::before {
+        content: "";
+        width: 14px;
+        height: 1px;
+        background: var(--gold);
+      }
+
+      .cs-h2 {
+        font-family: var(--serif);
+        font-size: clamp(1.3rem, 2.5vw, 1.75rem);
+        font-weight: 400;
+        color: var(--ink);
+        letter-spacing: -0.02em;
+        line-height: 1.2;
+        margin-bottom: 1rem;
+      }
+
+      .cs-p {
+        font-size: 0.95rem;
+        color: var(--mid);
+        line-height: 1.8;
+        margin-bottom: 0.85rem;
+      }
+
+      .cs-p:last-child {
+        margin-bottom: 0;
+      }
+
+      .cs-p strong {
+        color: var(--body);
+        font-weight: 500;
+      }
+
+      .cs-hr {
+        height: 1px;
+        background: var(--border);
+        margin: 2.75rem 0;
+      }
+
+      .decision {
+        border-left: 2px solid var(--border);
+        padding: 1rem 1.25rem;
+        background: var(--off);
+        border-radius: 0 4px 4px 0;
+        margin: 1.25rem 0;
+        transition: border-left-color 0.2s;
+      }
+
+      .decision:hover {
+        border-left-color: var(--accent);
+      }
+
+      .decision-label {
+        font-family: var(--mono);
+        font-size: 0.58rem;
+        color: var(--accent);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-bottom: 0.35rem;
+      }
+
+      .decision-text {
+        font-size: 0.875rem;
+        color: var(--body);
+        line-height: 1.65;
+      }
+
+      .decision-text strong {
+        font-weight: 500;
+      }
+
+      .steps {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .step {
+        display: grid;
+        grid-template-columns: 2.5rem 1fr;
+        gap: 0.75rem;
+        padding: 1.1rem 0;
+        border-top: 1px solid var(--border);
+      }
+
+      .step:last-child {
+        border-bottom: 1px solid var(--border);
+      }
+
+      .step-num {
+        font-family: var(--mono);
+        font-size: 0.6rem;
+        color: var(--muted);
+        padding-top: 0.2rem;
+      }
+
+      .step-title {
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--ink);
+        margin-bottom: 0.3rem;
+      }
+
+      .step-body {
+        font-size: 0.84rem;
+        color: var(--mid);
+        line-height: 1.65;
+      }
+
+      .step-body strong {
+        color: var(--body);
+        font-weight: 500;
+      }
+
+      /* Outcome */
+      .outcome-row {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1px;
+        background: var(--border);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        overflow: hidden;
+        margin: 1.5rem 0;
+      }
+
+      .outcome-cell {
+        background: var(--off);
+        padding: 1.25rem 1rem;
+      }
+
+      .oc-val {
+        font-family: var(--serif);
+        font-size: 2rem;
+        color: var(--ink);
+        font-weight: 400;
+        line-height: 1;
+        letter-spacing: -0.02em;
+        margin-bottom: 0.3rem;
+      }
+
+      .oc-label {
+        font-size: 0.75rem;
+        color: var(--mid);
+        line-height: 1.4;
+      }
+
+      .tools-strip {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+        margin-top: 1.5rem;
+      }
+
+      .tool-tag {
+        font-family: var(--mono);
+        font-size: 0.62rem;
+        color: var(--mid);
+        border: 1px solid var(--border);
+        padding: 0.25rem 0.6rem;
+        border-radius: 3px;
+      }
+
+      .next-bar {
+        border-top: 1px solid var(--border);
+        max-width: calc(var(--w) + var(--gx) * 2);
+        margin: 0 auto;
+        padding: 2.5rem var(--gx);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 2rem;
+      }
+
+      .next-label {
+        font-family: var(--mono);
+        font-size: 0.6rem;
+        color: var(--muted);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-bottom: 0.4rem;
+      }
+
+      .next-title {
+        font-family: var(--serif);
+        font-size: 1.35rem;
+        color: var(--ink);
+        letter-spacing: -0.015em;
+      }
+
+      .next-arrow {
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        border: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--mid);
+        flex-shrink: 0;
+        transition:
+          background 0.2s,
+          border-color 0.2s,
+          color 0.2s,
+          transform 0.25s var(--ease);
+      }
+
+      .next-arrow:hover {
+        background: var(--ink);
+        border-color: var(--ink);
+        color: var(--white);
+        transform: rotate(45deg);
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(16px);
+        transition:
+          opacity 0.65s var(--ease),
+          transform 0.65s var(--ease);
+      }
+
+      .reveal.in {
+        opacity: 1;
+        transform: none;
+      }
+
+      .d1 {
+        transition-delay: 0.1s;
+      }
+
+      .d2 {
+        transition-delay: 0.2s;
+      }
+
+      .d3 {
+        transition-delay: 0.3s;
+      }
+
+      @media (max-width: 600px) {
+        .impact-strip {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        .impact-cell:last-child {
+          grid-column: 1 / -1;
+          border-top: 1px solid var(--border);
+        }
+
+        .meta-strip {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        .meta-item {
+          border-bottom: 1px solid var(--border);
+          padding: 0.85rem 0;
+          border-right: none;
+          margin-right: 0;
+        }
+
+        .meta-item:nth-child(odd) {
+          padding-right: 1rem;
+          border-right: 1px solid var(--border);
+        }
+
+        .schema-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .outcome-row {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <nav>
+      <a href="index.html" class="n-logo"
+        ><img
+          src="favicon.png"
+          alt="Vaishavi Jay"
+          style="
+            height: 28px;
+            width: 28px;
+            object-fit: contain;
+            display: block;
+          "
+      /></a>
+      <a href="index.html#" class="n-back">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path
+            d="M13 7H1M6.5 2L2 7l4.5 5"
+            stroke="currentColor"
+            stroke-width="1.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+        All Work
+      </a>
+    </nav>
+
+    <div class="hero">
+      <div class="owner-strip reveal">
+        <span class="owner-badge ob-platform"
+          >Platform Engineering · Data Infrastructure</span
+        >
+        <span class="owner-badge ob-owner">Sole Owner</span>
+        <span class="owner-badge ob-scale">8,000+ students · 3 programs</span>
+      </div>
+
+      <h1 class="hero-title reveal d1">
+        NUCEE Data Platform:<br /><em>From Fragmented Silos</em><br />to
+        Repeatable Infrastructure
+      </h1>
+      <p class="hero-lede reveal d2">
+        Northeastern University's Center of Entrepreneurship Education had no
+        centralized data platform. I built its first: designed the schema,
+        standardized definitions across three programs, migrated 800+ users to a
+        new platform, and automated 10+ workflows that had required hours of
+        manual work each week.
+      </p>
+
+      <div class="impact-strip reveal d2">
+        <div class="impact-cell">
+          <div class="impact-val">8K+</div>
+          <div class="impact-label">
+            Students served across VMN, IDEA, and Mosaic
+          </div>
+        </div>
+        <div class="impact-cell">
+          <div class="impact-val">−50%</div>
+          <div class="impact-label">Reduction in data retrieval time</div>
+        </div>
+        <div class="impact-cell">
+          <div class="impact-val">800+</div>
+          <div class="impact-label">
+            Mentors and students migrated to new platform
+          </div>
+        </div>
+      </div>
+
+      <div class="meta-strip reveal d3">
+        <div class="meta-item">
+          <div class="meta-label">Role</div>
+          <div class="meta-val">Data &amp; Impact Fellow · Sole Owner</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Timeline</div>
+          <div class="meta-val">Jan – Aug 2025</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Organization</div>
+          <div class="meta-val">NUCEE · Northeastern University</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Stack</div>
+          <div class="meta-val">
+            Salesforce · Airtable · Chronus · Tableau · Python · Excel
+          </div>
+        </div>
+      </div>
+
+      <!-- PLATFORM ARCHITECTURE DIAGRAM -->
+      <div class="platform-wrap reveal">
+        <div class="platform-header">
+          <div class="platform-header-label">
+            Data Architecture · Unified schema across 3 programs
+          </div>
+          <div class="platform-header-chips">
+            <span class="platform-chip">Salesforce</span>
+            <span class="platform-chip">Airtable</span>
+            <span class="platform-chip">Chronus</span>
+          </div>
+        </div>
+        <div class="platform-svg-wrap">
+          <svg
+            viewBox="0 0 640 280"
+            xmlns="http://www.w3.org/2000/svg"
+            style="
+              width: 100%;
+              max-width: 640px;
+              display: block;
+              font-family: &quot;DM Mono&quot;, monospace;
+            "
+          >
+            <!-- Source systems row -->
+            <text
+              x="320"
+              y="20"
+              font-size="7.5"
+              fill="#A8A39B"
+              text-anchor="middle"
+              font-family="'DM Mono',monospace"
+              letter-spacing=".08em"
+            >
+              SOURCE SYSTEMS, PREVIOUSLY SILOED
+            </text>
+            <rect
+              x="20"
+              y="28"
+              width="140"
+              height="38"
+              rx="5"
+              fill="#F8F7F5"
+              stroke="#E8E6E1"
+              stroke-width="1"
+            />
+            <text
+              x="90"
+              y="45"
+              font-size="9"
+              fill="#6B6560"
+              text-anchor="middle"
+              font-family="'DM Mono',monospace"
+            >
+              VMN Program
+            </text>
+            <text
+              x="90"
+              y="58"
+              font-size="7.5"
+              fill="#A8A39B"
+              text-anchor="middle"
+              font-family="'DM Mono',monospace"
+            >
+              spreadsheets · ad hoc
+            </text>
+
+            <rect
+              x="250"
+              y="28"
+              width="140"
+              height="38"
+              rx="5"
+              fill="#F8F7F5"
+              stroke="#E8E6E1"
+              stroke-width="1"
+            />
+            <text
+              x="320"
+              y="45"
+              font-size="9"
+              fill="#6B6560"
+              text-anchor="middle"
+              font-family="'DM Mono',monospace"
+            >
+              IDEA Program
+            </text>
+            <text
+              x="320"
+              y="58"
+              font-size="7.5"
+              fill="#A8A39B"
+              text-anchor="middle"
+              font-family="'DM Mono',monospace"
+            >
+              Airtable · Salesforce
+            </text>
+
+            <rect
+              x="480"
+              y="28"
+              width="140"
+              height="38"
+              rx="5"
+              fill="#F8F7F5"
+              stroke="#E8E6E1"
+              stroke-width="1"
+            />
+            <text
+              x="550"
+              y="45"
+              font-size="9"
+              fill="#6B6560"
+              text-anchor="middle"
+              font-family="'DM Mono',monospace"
+            >
+              Mosaic Program
+            </text>
+            <text
+              x="550"
+              y="58"
+              font-size="7.5"
+              fill="#A8A39B"
+              text-anchor="middle"
+              font-family="'DM Mono',monospace"
+            >
+              Chronus · spreadsheets
+            </text>
+
+            <!-- Lines to unified layer -->
+            <line
+              x1="90"
+              y1="66"
+              x2="200"
+              y2="120"
+              stroke="#B8D9B8"
+              stroke-width="1.5"
+              stroke-dasharray="4 3"
+            />
+            <line
+              x1="320"
+              y1="66"
+              x2="320"
+              y2="120"
+              stroke="#B8D9B8"
+              stroke-width="1.5"
+              stroke-dasharray="4 3"
+            />
+            <line
+              x1="550"
+              y1="66"
+              x2="440"
+              y2="120"
+              stroke="#B8D9B8"
+              stroke-width="1.5"
+              stroke-dasharray="4 3"
+            />
+
+            <!-- Unified platform -->
+            <rect
+              x="140"
+              y="120"
+              width="360"
+              height="52"
+              rx="6"
+              fill="#111109"
+              stroke="rgba(92, 112, 82,.4)"
+              stroke-width="1.5"
+            />
+            <circle cx="163" cy="137" r="4" fill="#5CBF56" opacity=".85" />
+            <text
+              x="178"
+              y="139"
+              font-size="9.5"
+              fill="rgba(255,255,255,.8)"
+              font-family="'DM Mono',monospace"
+            >
+              Unified Data Platform
+            </text>
+            <text
+              x="178"
+              y="153"
+              font-size="7.5"
+              fill="rgba(255,255,255,.3)"
+              font-family="'DM Mono',monospace"
+            >
+              canonical schema · shared definitions · 10+ automated workflows
+            </text>
+            <text
+              x="163"
+              y="165"
+              font-size="7"
+              fill="rgba(92, 112, 82,.7)"
+              font-family="'DM Mono',monospace"
+            >
+              Salesforce (source of truth) · Airtable (working layer) · Chronus
+              (mentor tracking)
+            </text>
+
+            <!-- Lines to outputs -->
+            <line
+              x1="220"
+              y1="172"
+              x2="130"
+              y2="218"
+              stroke="rgba(92, 112, 82,.3)"
+              stroke-width="1.5"
+              stroke-dasharray="4 3"
+            />
+            <line
+              x1="320"
+              y1="172"
+              x2="320"
+              y2="218"
+              stroke="rgba(92, 112, 82,.3)"
+              stroke-width="1.5"
+              stroke-dasharray="4 3"
+            />
+            <line
+              x1="420"
+              y1="172"
+              x2="510"
+              y2="218"
+              stroke="rgba(92, 112, 82,.3)"
+              stroke-width="1.5"
+              stroke-dasharray="4 3"
+            />
+
+            <!-- Output nodes -->
+            <rect
+              x="40"
+              y="218"
+              width="180"
+              height="38"
+              rx="5"
+              fill="#EBF5EB"
+              stroke="#B8D9B8"
+              stroke-width="1"
+            />
+            <text
+              x="130"
+              y="233"
+              font-size="9"
+              fill="#2D6B2D"
+              text-anchor="middle"
+              font-family="'DM Mono',monospace"
+            >
+              FY25 Impact Report
+            </text>
+            <text
+              x="130"
+              y="247"
+              font-size="7.5"
+              fill="#4A6741"
+              text-anchor="middle"
+              font-family="'DM Mono',monospace"
+            >
+              200+ stakeholders · first ever
+            </text>
+
+            <rect
+              x="240"
+              y="218"
+              width="160"
+              height="38"
+              rx="5"
+              fill="#EBF5EB"
+              stroke="#B8D9B8"
+              stroke-width="1"
+            />
+            <text
+              x="320"
+              y="233"
+              font-size="9"
+              fill="#2D6B2D"
+              text-anchor="middle"
+              font-family="'DM Mono',monospace"
+            >
+              Princeton Review Data
+            </text>
+            <text
+              x="320"
+              y="247"
+              font-size="7.5"
+              fill="#4A6741"
+              text-anchor="middle"
+              font-family="'DM Mono',monospace"
+            >
+              20yr process redesigned
+            </text>
+
+            <rect
+              x="420"
+              y="218"
+              width="180"
+              height="38"
+              rx="5"
+              fill="#EBF5EB"
+              stroke="#B8D9B8"
+              stroke-width="1"
+            />
+            <text
+              x="510"
+              y="233"
+              font-size="9"
+              fill="#2D6B2D"
+              text-anchor="middle"
+              font-family="'DM Mono',monospace"
+            >
+              Mentor/Student Platform
+            </text>
+            <text
+              x="510"
+              y="247"
+              font-size="7.5"
+              fill="#4A6741"
+              text-anchor="middle"
+              font-family="'DM Mono',monospace"
+            >
+              800+ users migrated
+            </text>
+
+            <text
+              x="320"
+              y="274"
+              font-size="7"
+              fill="#A8A39B"
+              text-anchor="middle"
+              font-family="'DM Mono',monospace"
+            >
+              documentation · data dictionaries · onboarding guides included as
+              part of the platform deliverable
+            </text>
+          </svg>
+        </div>
+      </div>
+
+      <!-- SCHEMA VISUAL -->
+      <div class="schema-wrap reveal">
+        <div class="schema-label">
+          Unified Data Schema · Shared across VMN, IDEA, Mosaic
+        </div>
+        <div class="schema-grid">
+          <div class="schema-table">
+            <div class="schema-table-header">students <span>entity</span></div>
+            <div class="schema-row">
+              <span class="field"
+                >student_id <span class="schema-pk">PK</span></span
+              ><span class="type">uuid</span>
+            </div>
+            <div class="schema-row">
+              <span class="field">program</span><span class="type">enum</span>
+            </div>
+            <div class="schema-row">
+              <span class="field">cohort_year</span
+              ><span class="type">integer</span>
+            </div>
+            <div class="schema-row">
+              <span class="field"
+                >venture_id <span class="schema-fk">FK</span></span
+              ><span class="type">uuid</span>
+            </div>
+            <div class="schema-row">
+              <span class="field">stage</span><span class="type">enum</span>
+            </div>
+            <div class="schema-row">
+              <span class="field">active</span><span class="type">boolean</span>
+            </div>
+          </div>
+          <div class="schema-table">
+            <div class="schema-table-header">ventures <span>entity</span></div>
+            <div class="schema-row">
+              <span class="field"
+                >venture_id <span class="schema-pk">PK</span></span
+              ><span class="type">uuid</span>
+            </div>
+            <div class="schema-row">
+              <span class="field">name</span><span class="type">string</span>
+            </div>
+            <div class="schema-row">
+              <span class="field">stage</span><span class="type">enum</span>
+            </div>
+            <div class="schema-row">
+              <span class="field"
+                >program <span class="schema-fk">FK</span></span
+              ><span class="type">enum</span>
+            </div>
+            <div class="schema-row">
+              <span class="field">funding_raised</span
+              ><span class="type">decimal</span>
+            </div>
+            <div class="schema-row">
+              <span class="field"
+                >mentor_id <span class="schema-fk">FK</span></span
+              ><span class="type">uuid</span>
+            </div>
+          </div>
+          <div class="schema-table">
+            <div class="schema-table-header">
+              engagements <span>entity</span>
+            </div>
+            <div class="schema-row">
+              <span class="field"
+                >engagement_id <span class="schema-pk">PK</span></span
+              ><span class="type">uuid</span>
+            </div>
+            <div class="schema-row">
+              <span class="field"
+                >mentor_id <span class="schema-fk">FK</span></span
+              ><span class="type">uuid</span>
+            </div>
+            <div class="schema-row">
+              <span class="field"
+                >venture_id <span class="schema-fk">FK</span></span
+              ><span class="type">uuid</span>
+            </div>
+            <div class="schema-row">
+              <span class="field">type</span><span class="type">enum</span>
+            </div>
+            <div class="schema-row">
+              <span class="field">session_date</span
+              ><span class="type">date</span>
+            </div>
+            <div class="schema-row">
+              <span class="field">duration_min</span
+              ><span class="type">integer</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="body-wrap">
+      <div class="cs-sec reveal">
+        <div class="cs-sec-label">Context</div>
+        <h2 class="cs-h2">Three programs, no shared data model.</h2>
+        <p class="cs-p">
+          The NU Center for Entrepreneurship Education runs three programs: VMN,
+          IDEA, and Mosaic. Each serves students, ventures, and mentors at
+          different stages of the entrepreneurship pipeline. When I joined, the
+          programs operated in silos: separate tracking systems, inconsistent
+          definitions for the same metrics, and no way to produce a unified view
+          of NUCEE's impact.
+        </p>
+        <p class="cs-p">
+          The Princeton Review ranking submission had run the same way for 20
+          years: manual, fragmented, and dependent on institutional memory
+          rather than documented process. Every time someone needed a number,
+          how many active ventures, how many mentor sessions this quarter, what
+          stage students were at, they had to hunt across multiple tools and
+          hope the definitions matched.
+        </p>
+        <p class="cs-p">
+          My job was to build the infrastructure that answers those questions
+          reliably.
+        </p>
+      </div>
+
+      <div class="cs-hr"></div>
+
+      <div class="cs-sec reveal">
+        <div class="cs-sec-label">What I Built</div>
+        <h2 class="cs-h2">Platform design first, automation second.</h2>
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">01</div>
+            <div>
+              <div class="step-title">
+                Designed NUCEE's first centralized data architecture
+              </div>
+              <div class="step-body">
+                Mapped every data source across the three programs: Salesforce,
+                Airtable, Chronus, and ad-hoc spreadsheets. Designed a unified
+                schema to represent students, ventures, mentors, and engagements
+                consistently. Defined shared field names, data types, and enums
+                so the same concept meant the same thing in every program.
+              </div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">02</div>
+            <div>
+              <div class="step-title">
+                Standardized definitions across three programs, before building
+                anything
+              </div>
+              <div class="step-body">
+                What counts as an "active venture"? What's a mentor "session"?
+                Each program answered differently. Automating on top of
+                inconsistent definitions would have locked in the inconsistency.
+                Aligning on canonical definitions first meant every later
+                workflow built from the same foundation. This took weeks. The
+                technical work took days.
+              </div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">03</div>
+            <div>
+              <div class="step-title">
+                Built 10+ automated workflows replacing manual processes
+              </div>
+              <div class="step-body">
+                Built automations in Airtable and Salesforce to replace manual
+                data collection, tracking, and reporting: status updates,
+                reporting triggers, and data sync flows that had required hours
+                of manual work each week. Cut manual data retrieval time by
+                roughly 50%.
+              </div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">04</div>
+            <div>
+              <div class="step-title">
+                Delivered NUCEE's first unified annual impact report
+              </div>
+              <div class="step-body">
+                Produced the organization's first report consolidating data
+                across all three programs into one narrative: venture counts,
+                mentor engagement, student reach, and funding outcomes. Used by
+                200+ stakeholders, including university leadership, program
+                staff, and external partners.
+              </div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">05</div>
+            <div>
+              <div class="step-title">
+                Rebuilt the Princeton Review ranking submission from scratch
+              </div>
+              <div class="step-body">
+                Redesigned a process that hadn't changed in 20 years. Documented
+                the new workflow, identified the required data points, and built
+                infrastructure to pull them reliably and repeatably. This ended
+                the manual scramble each submission year.
+              </div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">06</div>
+            <div>
+              <div class="step-title">
+                Migrated 800+ mentors and students to a new platform
+              </div>
+              <div class="step-body">
+                Directed the data migration and operations redesign for a
+                NUCEE-affiliated program. Rebuilt mentor and student tracking
+                for 300+ mentors and 500+ students on a new platform. Scoped the
+                migration, mapped field relationships, and validated data
+                fidelity after the migration.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cs-hr"></div>
+
+      <div class="cs-sec reveal">
+        <div class="cs-sec-label">Platform Architecture Decisions</div>
+        <h2 class="cs-h2">Why these choices, not others.</h2>
+
+        <div class="decision">
+          <div class="decision-label">
+            Salesforce as source of truth, Airtable as working layer
+          </div>
+          <div class="decision-text">
+            Salesforce held the authoritative contact and venture records, but
+            program staff worked in spreadsheets, not Salesforce. Airtable
+            bridged the gap: familiar enough for non-technical staff to use
+            daily, structured enough to support automations and reporting.
+            Salesforce stayed the canonical source; Airtable became the
+            operational surface.
+          </div>
+        </div>
+
+        <div class="decision">
+          <div class="decision-label">Definitions before tooling, always</div>
+          <div class="decision-text">
+            The biggest bottleneck wasn't technical. It was semantic. VMN, IDEA,
+            and Mosaic each had informal, incompatible definitions for shared
+            concepts. Automating on inconsistent definitions would have locked
+            in the inconsistency at scale. Aligning on shared definitions first
+            made every later workflow trustworthy from day one.
+          </div>
+        </div>
+
+        <div class="decision">
+          <div class="decision-label">
+            Documentation as a platform deliverable
+          </div>
+          <div class="decision-text">
+            A co-op engagement that leaves behind undocumented systems is a
+            liability, not an asset. I documented every workflow, schema
+            decision, and automation: data dictionaries, onboarding guides, and
+            workflow maps, with enough detail that someone who wasn't there when
+            it was built can maintain, extend, or debug it. That was a design
+            constraint from the start, not an afterthought.
+          </div>
+        </div>
+      </div>
+
+      <div class="cs-hr"></div>
+
+      <div class="cs-sec reveal">
+        <div class="cs-sec-label">Outcomes</div>
+        <h2 class="cs-h2">A platform that keeps working.</h2>
+        <div class="outcome-row">
+          <div class="outcome-cell">
+            <div class="oc-val">−50%</div>
+            <div class="oc-label">
+              Reduction in data retrieval time via automated workflows
+            </div>
+          </div>
+          <div class="outcome-cell">
+            <div class="oc-val">800+</div>
+            <div class="oc-label">
+              Users migrated to new platform with validated data fidelity
+            </div>
+          </div>
+          <div class="outcome-cell">
+            <div class="oc-val">10+</div>
+            <div class="oc-label">
+              Manual workflows replaced by automated systems
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cs-hr"></div>
+
+      <div class="cs-sec reveal">
+        <div class="cs-sec-label">What I'd Do Differently</div>
+        <h2 class="cs-h2">What I took from it.</h2>
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">01</div>
+            <div>
+              <div class="step-title">
+                Data infrastructure is an organizational problem first
+              </div>
+              <div class="step-body">
+                The fragmentation at NUCEE wasn't a technical failure. It was an
+                organizational one. Three programs grew independently, each with
+                its own tooling and conventions. Fixing the infrastructure meant
+                changing how people across the organization thought about shared
+                data, not just building better pipelines.
+              </div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">02</div>
+            <div>
+              <div class="step-title">
+                The most valuable deliverable is the one that keeps working
+              </div>
+              <div class="step-body">
+                A report someone recreates manually every year isn't
+                infrastructure. It's a recurring project. The goal was always to
+                build systems that produce value after I leave: automation over
+                one-off analysis, documentation over tribal knowledge, and
+                repeatability over elegance.
+              </div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">03</div>
+            <div>
+              <div class="step-title">
+                Standardization is a leadership challenge, not a technical one
+              </div>
+              <div class="step-body">
+                Getting three program teams to agree on shared definitions took
+                more facilitation than I expected. Building the unified schema
+                took days. Getting buy-in took weeks. That ratio was right: a
+                foundation built on contested definitions would have collapsed
+                the moment someone tried to produce a cross-program report.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tools-strip">
+          <span class="tool-tag">Salesforce</span>
+          <span class="tool-tag">Airtable</span>
+          <span class="tool-tag">Tableau</span>
+          <span class="tool-tag">Chronus</span>
+          <span class="tool-tag">Jupyter</span>
+          <span class="tool-tag">Python</span>
+          <span class="tool-tag">Excel</span>
+          <span class="tool-tag">Data Modeling</span>
+          <span class="tool-tag">Process Automation</span>
+          <span class="tool-tag">Stakeholder Reporting</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="next-bar reveal">
+      <div>
+        <div class="next-label">Next Project</div>
+        <div class="next-title">
+          Alumni Engagement Analytics · Aspire Institute
+        </div>
+      </div>
+      <a href="project-aspire.html" class="next-arrow">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path
+            d="M1 13L13 1M13 1H4M13 1v9"
+            stroke="currentColor"
+            stroke-width="1.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </a>
+    </div>
+
+    <script>
+      const io = new IntersectionObserver(
+        (e) => {
+          e.forEach((x) => {
+            if (x.isIntersecting) {
+              x.target.classList.add("in");
+              io.unobserve(x.target);
+            }
+          });
+        },
+        { threshold: 0.06, rootMargin: "0px 0px -24px 0px" },
+      );
+      document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+    </script>
+  </body>
+</html>

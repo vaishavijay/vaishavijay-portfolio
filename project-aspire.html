@@ -1,0 +1,1086 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Alumni Engagement Analytics — Vaishavi Jay
+    </title>
+    <link rel="icon" href="favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --white: #ffffff;
+        --off: #f8f7f5;
+        --border: #e8e6e1;
+        --muted: #a8a39b;
+        --mid: #6b6560;
+        --body: #2a2520;
+        --ink: #111109;
+        --accent: #5C7052;
+        --gold: #A9884F;
+        --serif: "Space Grotesk", system-ui, sans-serif;
+        --sans: "Inter", system-ui, sans-serif;
+        --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+        --ease: cubic-bezier(0.16, 1, 0.3, 1);
+        --w: 680px;
+        --gx: clamp(1.5rem, 5vw, 4rem);
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background: var(--white);
+        color: var(--body);
+        font-family: var(--sans);
+        font-size: 16px;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        padding: 1.25rem var(--gx);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: row-reverse;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(14px);
+        border-bottom: 1px solid var(--border);
+      }
+
+      .n-logo {
+        font-family: var(--serif);
+        font-size: 1rem;
+        color: var(--ink);
+      }
+
+      .n-back {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        font-size: 0.8rem;
+        color: var(--mid);
+        transition: color 0.2s;
+      }
+
+      .n-back:hover {
+        color: var(--ink);
+      }
+
+      .hero {
+        max-width: calc(var(--w) + var(--gx) * 2);
+        margin: 0 auto;
+        padding: 6.5rem var(--gx) 2.5rem;
+      }
+
+      .owner-strip {
+        display: flex;
+        align-items: center;
+        gap: 0.65rem;
+        flex-wrap: wrap;
+        margin-bottom: 1.1rem;
+      }
+
+      .owner-badge {
+        font-family: var(--mono);
+        font-size: 0.62rem;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+        padding: 0.3rem 0.7rem;
+        border-radius: 3px;
+      }
+
+      .ob-data {
+        background: rgba(92, 112, 82, 0.1);
+        color: var(--accent);
+        border: 1px solid rgba(92, 112, 82, 0.25);
+      }
+
+      .ob-team {
+        background: rgba(15, 17, 23, 0.06);
+        color: var(--body);
+        border: 1px solid var(--border);
+      }
+
+      .hero-title {
+        font-family: var(--serif);
+        font-size: clamp(2.2rem, 5vw, 3.6rem);
+        font-weight: 400;
+        color: var(--ink);
+        line-height: 1.06;
+        letter-spacing: -0.025em;
+        margin-bottom: 1.25rem;
+      }
+
+      .hero-title em {
+        font-style: normal;
+        color: var(--accent);
+      }
+
+      .hero-lede {
+        font-size: 1rem;
+        color: var(--mid);
+        line-height: 1.75;
+        margin-bottom: 2rem;
+      }
+
+      .hero-lede strong {
+        color: var(--body);
+        font-weight: 500;
+      }
+
+      /* Dashboard visual */
+      .dashboard-visual {
+        background: var(--off);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        overflow: hidden;
+        margin-bottom: 2rem;
+        font-family: var(--mono);
+      }
+
+      .dash-topbar {
+        background: var(--white);
+        border-bottom: 1px solid var(--border);
+        padding: 0.75rem 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 0.62rem;
+        color: var(--muted);
+      }
+
+      .dash-title {
+        font-family: var(--sans);
+        font-size: 0.8rem;
+        font-weight: 500;
+        color: var(--body);
+      }
+
+      .dash-body {
+        padding: 1.5rem;
+      }
+
+      .dash-kpis {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1px;
+        background: var(--border);
+        border: 1px solid var(--border);
+        border-radius: 5px;
+        overflow: hidden;
+        margin-bottom: 1rem;
+      }
+
+      .kpi {
+        background: var(--white);
+        padding: 1rem 1rem 0.85rem;
+      }
+
+      .kpi-val {
+        font-family: var(--serif);
+        font-size: 1.6rem;
+        color: var(--ink);
+        font-weight: 400;
+        line-height: 1;
+        letter-spacing: -0.02em;
+        margin-bottom: 0.2rem;
+      }
+
+      .kpi-val.up {
+        color: var(--accent);
+      }
+
+      .kpi-val.down {
+        color: #8b4a35;
+      }
+
+      .kpi-label {
+        font-size: 0.62rem;
+        color: var(--muted);
+        line-height: 1.3;
+      }
+
+      .kpi-delta {
+        font-family: var(--mono);
+        font-size: 0.55rem;
+        margin-top: 0.2rem;
+      }
+
+      .kpi-delta.pos {
+        color: var(--accent);
+      }
+
+      .kpi-delta.neg {
+        color: #8b4a35;
+      }
+
+      .dash-charts {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+      }
+
+      .chart-card {
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-radius: 5px;
+        padding: 1rem;
+      }
+
+      .chart-label {
+        font-size: 0.6rem;
+        color: var(--muted);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-bottom: 0.75rem;
+      }
+
+      .bars {
+        display: flex;
+        align-items: flex-end;
+        gap: 0.35rem;
+        height: 60px;
+      }
+
+      .bar-wrap {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.25rem;
+        flex: 1;
+      }
+
+      .bar {
+        width: 100%;
+        background: var(--border);
+        border-radius: 2px 2px 0 0;
+      }
+
+      .bar.hi {
+        background: var(--accent);
+        opacity: 0.7;
+      }
+
+      .bar.med {
+        background: var(--accent);
+        opacity: 0.4;
+      }
+
+      .bar.lo {
+        background: var(--border);
+      }
+
+      .bar-tick {
+        font-size: 0.52rem;
+        color: var(--muted);
+      }
+
+      .donut-wrap {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .donut-ring {
+        width: 56px;
+        height: 56px;
+        flex-shrink: 0;
+        border-radius: 50%;
+        background: conic-gradient(
+          var(--accent) 0deg 97deg,
+          var(--border) 97deg 360deg
+        );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+      }
+
+      .donut-ring::after {
+        content: "";
+        width: 36px;
+        height: 36px;
+        background: var(--white);
+        border-radius: 50%;
+        position: absolute;
+      }
+
+      .donut-pct {
+        font-family: var(--serif);
+        font-size: 1.1rem;
+        color: var(--ink);
+        position: relative;
+        z-index: 1;
+      }
+
+      .donut-text {
+        font-size: 0.75rem;
+        color: var(--mid);
+        line-height: 1.45;
+      }
+
+      .impact-strip {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1px;
+        background: var(--border);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        overflow: hidden;
+        margin-bottom: 2rem;
+      }
+
+      .impact-cell {
+        background: var(--white);
+        padding: 1.5rem 1.25rem;
+      }
+
+      .impact-val {
+        font-family: var(--serif);
+        font-size: 2.5rem;
+        font-weight: 400;
+        color: var(--ink);
+        line-height: 1;
+        letter-spacing: -0.03em;
+        margin-bottom: 0.3rem;
+      }
+
+      .impact-label {
+        font-size: 0.78rem;
+        color: var(--mid);
+        line-height: 1.4;
+      }
+
+      .meta-strip {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        border-top: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+        margin-bottom: 3rem;
+      }
+
+      .meta-item {
+        padding: 1rem 0;
+        border-right: 1px solid var(--border);
+        padding-right: 1.5rem;
+        margin-right: 1.5rem;
+      }
+
+      .meta-item:last-child {
+        border-right: none;
+        padding-right: 0;
+        margin-right: 0;
+      }
+
+      .meta-label {
+        font-family: var(--mono);
+        font-size: 0.56rem;
+        color: var(--muted);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-bottom: 0.35rem;
+      }
+
+      .meta-val {
+        font-size: 0.82rem;
+        color: var(--body);
+        line-height: 1.4;
+      }
+
+      .body-wrap {
+        max-width: calc(var(--w) + var(--gx) * 2);
+        margin: 0 auto;
+        padding: 0 var(--gx) 5rem;
+      }
+
+      .cs-sec {
+        margin-bottom: 2.75rem;
+      }
+
+      .cs-sec-label {
+        font-family: var(--mono);
+        font-size: 0.62rem;
+        color: var(--accent);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        margin-bottom: 0.65rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .cs-sec-label::before {
+        content: "";
+        width: 14px;
+        height: 1px;
+        background: var(--gold);
+      }
+
+      .cs-h2 {
+        font-family: var(--serif);
+        font-size: clamp(1.3rem, 2.5vw, 1.75rem);
+        font-weight: 400;
+        color: var(--ink);
+        letter-spacing: -0.02em;
+        line-height: 1.2;
+        margin-bottom: 1rem;
+      }
+
+      .cs-p {
+        font-size: 0.95rem;
+        color: var(--mid);
+        line-height: 1.8;
+        margin-bottom: 0.85rem;
+      }
+
+      .cs-p:last-child {
+        margin-bottom: 0;
+      }
+
+      .cs-p strong {
+        color: var(--body);
+        font-weight: 500;
+      }
+
+      .cs-hr {
+        height: 1px;
+        background: var(--border);
+        margin: 2.75rem 0;
+      }
+
+      .decision {
+        border-left: 2px solid var(--border);
+        padding: 1rem 1.25rem;
+        background: var(--off);
+        border-radius: 0 4px 4px 0;
+        margin: 1.25rem 0;
+        transition: border-left-color 0.2s;
+      }
+
+      .decision:hover {
+        border-left-color: var(--accent);
+      }
+
+      .decision-label {
+        font-family: var(--mono);
+        font-size: 0.58rem;
+        color: var(--accent);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-bottom: 0.35rem;
+      }
+
+      .decision-text {
+        font-size: 0.875rem;
+        color: var(--body);
+        line-height: 1.65;
+      }
+
+      .decision-text strong {
+        font-weight: 500;
+      }
+
+      .steps {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .step {
+        display: grid;
+        grid-template-columns: 2.5rem 1fr;
+        gap: 0.75rem;
+        padding: 1.1rem 0;
+        border-top: 1px solid var(--border);
+      }
+
+      .step:last-child {
+        border-bottom: 1px solid var(--border);
+      }
+
+      .step-num {
+        font-family: var(--mono);
+        font-size: 0.6rem;
+        color: var(--muted);
+        padding-top: 0.2rem;
+      }
+
+      .step-title {
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--ink);
+        margin-bottom: 0.3rem;
+      }
+
+      .step-body {
+        font-size: 0.875rem;
+        color: var(--mid);
+        line-height: 1.65;
+      }
+
+      .step-body strong {
+        color: var(--body);
+        font-weight: 500;
+      }
+
+      .findings {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.875rem;
+        margin: 1.25rem 0;
+      }
+
+      .findings th {
+        font-family: var(--mono);
+        font-size: 0.58rem;
+        color: var(--muted);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        text-align: left;
+        padding: 0.6rem 0.75rem;
+        border-bottom: 1px solid var(--border);
+        font-weight: 400;
+      }
+
+      .findings td {
+        padding: 0.75rem 0.75rem;
+        border-bottom: 1px solid var(--border);
+        color: var(--mid);
+        line-height: 1.45;
+        vertical-align: top;
+      }
+
+      .findings td:first-child {
+        color: var(--body);
+        font-weight: 500;
+        white-space: nowrap;
+      }
+
+      .findings tr:last-child td {
+        border-bottom: none;
+      }
+
+      .findings tr:nth-child(even) td {
+        background: var(--off);
+      }
+
+      .tag-pos {
+        font-family: var(--mono);
+        font-size: 0.58rem;
+        color: var(--accent);
+        background: rgba(92, 112, 82, 0.08);
+        border: 1px solid rgba(92, 112, 82, 0.2);
+        padding: 0.15rem 0.45rem;
+        border-radius: 3px;
+      }
+
+      .tag-neg {
+        font-family: var(--mono);
+        font-size: 0.58rem;
+        color: #8b4a35;
+        background: rgba(139, 74, 53, 0.08);
+        border: 1px solid rgba(139, 74, 53, 0.2);
+        padding: 0.15rem 0.45rem;
+        border-radius: 3px;
+      }
+
+      .next-bar {
+        border-top: 1px solid var(--border);
+        max-width: calc(var(--w) + var(--gx) * 2);
+        margin: 0 auto;
+        padding: 2.5rem var(--gx);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 2rem;
+      }
+
+      .next-label {
+        font-family: var(--mono);
+        font-size: 0.6rem;
+        color: var(--muted);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-bottom: 0.4rem;
+      }
+
+      .next-title {
+        font-family: var(--serif);
+        font-size: 1.35rem;
+        color: var(--ink);
+        letter-spacing: -0.015em;
+      }
+
+      .next-arrow {
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        border: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--mid);
+        flex-shrink: 0;
+        transition:
+          background 0.2s,
+          border-color 0.2s,
+          color 0.2s,
+          transform 0.25s var(--ease);
+      }
+
+      .next-arrow:hover {
+        background: var(--ink);
+        border-color: var(--ink);
+        color: var(--white);
+        transform: rotate(45deg);
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(16px);
+        transition:
+          opacity 0.65s var(--ease),
+          transform 0.65s var(--ease);
+      }
+
+      .reveal.in {
+        opacity: 1;
+        transform: none;
+      }
+
+      .d1 {
+        transition-delay: 0.1s;
+      }
+
+      .d2 {
+        transition-delay: 0.2s;
+      }
+
+      .d3 {
+        transition-delay: 0.3s;
+      }
+
+      @media (max-width: 600px) {
+        .impact-strip {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        .impact-cell:last-child {
+          grid-column: 1 / -1;
+          border-top: 1px solid var(--border);
+        }
+
+        .meta-strip {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        .meta-item {
+          border-bottom: 1px solid var(--border);
+          padding: 0.85rem 0;
+          border-right: none;
+          margin-right: 0;
+        }
+
+        .meta-item:nth-child(odd) {
+          padding-right: 1rem;
+          border-right: 1px solid var(--border);
+        }
+
+        .dash-kpis {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        .dash-charts {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <nav>
+      <a href="index.html" class="n-logo"><img src="favicon.png" alt="Vaishavi Jay" style="height:28px;width:28px;object-fit:contain;display:block;" /></a>
+      <a href="index.html#" class="n-back">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path
+            d="M13 7H1M6.5 2L2 7l4.5 5"
+            stroke="currentColor"
+            stroke-width="1.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+        All Work
+      </a>
+    </nav>
+
+    <div class="hero">
+      <div class="owner-strip reveal">
+        <span class="owner-badge ob-data"
+          >Data Analysis · Retention Strategy</span
+        >
+        <span class="owner-badge ob-team"
+          >Cross-functional · 3-person team</span
+        >
+      </div>
+
+      <h1 class="hero-title reveal d1">
+        Aspire Institute:<br /><em>Alumni Engagement</em><br />Analytics
+      </h1>
+      <p class="hero-lede reveal d2">
+        Analyzed newsletter and weekly digest performance across multiple send
+        cycles to find the content patterns driving alumni retention. Turned raw
+          email data into strategy recommendations that contributed to an 18%
+          improvement in alumni retention, and coordinated deliverables across a
+          3-person analyst team.
+      </p>
+
+      <!-- Dashboard visual -->
+      <div class="dashboard-visual reveal d2">
+        <div class="dash-topbar">
+          <span class="dash-title">Alumni Engagement Dashboard</span>
+          <span>Tableau · Google Sheets · Python</span>
+        </div>
+        <div class="dash-body">
+          <div class="dash-kpis">
+            <div class="kpi">
+              <div class="kpi-val up">34.2%</div>
+              <div class="kpi-label">Avg open rate</div>
+              <div class="kpi-delta pos">↑ career &amp; events content</div>
+            </div>
+            <div class="kpi">
+              <div class="kpi-val">8.7%</div>
+              <div class="kpi-label">Avg click-through rate</div>
+              <div class="kpi-delta pos">↑ after digest shortening</div>
+            </div>
+            <div class="kpi">
+              <div class="kpi-val down">−18%</div>
+              <div class="kpi-label">Digest click rate (long)</div>
+              <div class="kpi-delta neg">↓ inverse length relationship</div>
+            </div>
+            <div class="kpi">
+              <div class="kpi-val up">+18%</div>
+              <div class="kpi-label">Alumni retention</div>
+              <div class="kpi-delta pos">↑ post-recommendations</div>
+            </div>
+          </div>
+          <div class="dash-charts">
+            <div class="chart-card">
+              <div class="chart-label">Open Rate by Content Type</div>
+              <div class="bars">
+                <div class="bar-wrap">
+                  <div class="bar hi" style="height: 55px"></div>
+                  <div class="bar-tick">Career</div>
+                </div>
+                <div class="bar-wrap">
+                  <div class="bar hi" style="height: 50px"></div>
+                  <div class="bar-tick">Events</div>
+                </div>
+                <div class="bar-wrap">
+                  <div class="bar med" style="height: 35px"></div>
+                  <div class="bar-tick">News</div>
+                </div>
+                <div class="bar-wrap">
+                  <div class="bar lo" style="height: 22px"></div>
+                  <div class="bar-tick">Digest</div>
+                </div>
+              </div>
+            </div>
+            <div class="chart-card">
+              <div class="chart-label">Retention Improvement</div>
+              <div class="donut-wrap">
+                <div class="donut-ring">
+                  <div class="donut-pct">18%</div>
+                </div>
+                <div class="donut-text">
+                  18% improvement in alumni retention after
+                  strategy recommendations rolled out across newsletter
+                  and digest channels.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="impact-strip reveal d2">
+        <div class="impact-cell">
+          <div class="impact-val">+18%</div>
+          <div class="impact-label">Alumni retention improvement</div>
+        </div>
+        <div class="impact-cell">
+          <div class="impact-val">3</div>
+          <div class="impact-label">
+            Analysts coordinated into one deliverable
+          </div>
+        </div>
+        <div class="impact-cell">
+          <div class="impact-val">2</div>
+          <div class="impact-label">
+            Channels analyzed, newsletter and weekly digest
+          </div>
+        </div>
+      </div>
+
+      <div class="meta-strip reveal d3">
+        <div class="meta-item">
+          <div class="meta-label">Role</div>
+          <div class="meta-val">Data Analyst · Team of 3</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Timeline</div>
+          <div class="meta-val">Apr – May 2024</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Organization</div>
+          <div class="meta-val">Aspire Institute · Remote</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Stack</div>
+          <div class="meta-val">Python · Tableau · Excel · Google Sheets</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="body-wrap">
+      <div class="cs-sec reveal">
+        <div class="cs-sec-label">Context</div>
+        <h2 class="cs-h2">The data existed; the analysis didn't.</h2>
+        <p class="cs-p">
+          Aspire Institute runs an alumni engagement program across newsletter
+          and weekly digest channels. The data existed: multiple send cycles of
+          open rates, click rates, and content performance records. What didn't
+          exist was a structured analysis of which content drives engagement,
+          where the funnel breaks down, and what the team should do differently.
+        </p>
+        <p class="cs-p">
+          I handled the analysis and the cross-team coordination that kept three
+          independent analyses reading as one report.
+        </p>
+      </div>
+
+      <div class="cs-hr"></div>
+
+      <div class="cs-sec reveal">
+        <div class="cs-sec-label">What I Did</div>
+        <h2 class="cs-h2">Question-first, then the data.</h2>
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">01</div>
+            <div>
+              <div class="step-title">Defined the analytical question</div>
+              <div class="step-body">
+                Before opening a spreadsheet: what content drives clicks, and
+                why? That question shaped what we segmented, visualized, and
+                excluded.
+              </div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">02</div>
+            <div>
+              <div class="step-title">
+                Data cleaning and segmentation in Python and Excel
+              </div>
+              <div class="step-body">
+                Cleaned the dataset, segmented by content type and send date,
+                and found patterns in open and click performance: which content
+                categories drove the highest engagement, how performance varied
+                over time, and where the click funnel dropped off most.
+              </div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">03</div>
+            <div>
+              <div class="step-title">Dashboard build in Tableau</div>
+              <div class="step-body">
+                Built dashboards for non-technical stakeholders: open rate
+                trends over time, content performance by category, click-to-open
+                conversion rates, and engagement comparisons between the
+                newsletter and digest formats.
+              </div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">04</div>
+            <div>
+              <div class="step-title">
+                Cross-team coordination for a unified final report
+              </div>
+              <div class="step-body">
+                Worked with two other analysts to merge our separate analyses
+                into one deliverable. We set shared metric definitions early
+                (what "click rate" means, what "engagement" counts) and a common
+                visualization style, so the final report read as one analysis
+                rather than three stitched together.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cs-hr"></div>
+
+      <div class="cs-sec reveal">
+        <div class="cs-sec-label">Key Findings</div>
+        <h2 class="cs-h2">What the data showed.</h2>
+        <table class="findings">
+          <thead>
+            <tr>
+              <th>Finding</th>
+              <th>Signal</th>
+              <th>Implication</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Career and events content</td>
+              <td><span class="tag-pos">Highest open rates</span></td>
+              <td>
+                Alumni opened consistently when subject lines signaled
+                professional development or upcoming events. Utility drove
+                engagement.
+              </td>
+            </tr>
+            <tr>
+              <td>General digest editions</td>
+              <td><span class="tag-neg">Lowest click-through</span></td>
+              <td>
+                Catch-all digests without a clear content hook performed
+                poorly. Volume without focus diluted engagement.
+              </td>
+            </tr>
+            <tr>
+              <td>Subject line specificity</td>
+              <td><span class="tag-pos">Correlated with opens</span></td>
+              <td>
+                Benefit-led subject lines consistently outperformed vague or
+                date-based subject lines across all content types
+              </td>
+            </tr>
+            <tr>
+              <td>Digest length vs. click rate</td>
+              <td><span class="tag-neg">Inverse relationship</span></td>
+              <td>
+                Longer digests showed lower click-to-open rates. Shorter,
+                focused editions drove more action per reader.
+              </td>
+            </tr>
+            <tr>
+              <td>Send timing</td>
+              <td>Variable</td>
+              <td>
+                Inconsistent send times complicated performance analysis and
+                made it harder to build reader habit
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="cs-hr"></div>
+
+      <div class="cs-sec reveal">
+        <div class="cs-sec-label">Recommendations</div>
+        <h2 class="cs-h2">Four concrete changes.</h2>
+        <div class="decision">
+          <div class="decision-label">Lead with career and events content</div>
+          <div class="decision-text">
+            These two content types drove the highest engagement. Leading
+            newsletters with career opportunities and upcoming events, ahead of
+            general news, would increase the share of openers who click through.
+          </div>
+        </div>
+        <div class="decision">
+          <div class="decision-label">Shorten and focus the weekly digest</div>
+          <div class="decision-text">
+            The data showed an inverse relationship between digest length and
+            click rate. Fewer, better-chosen items outperform longer digests
+            with broad content. Recommended capping at 4–5 items with a clear
+            primary CTA per send.
+          </div>
+        </div>
+        <div class="decision">
+          <div class="decision-label">
+            Rewrite subject lines around benefit, not description
+          </div>
+          <div class="decision-text">
+            Subject lines that led with what the reader would get ("3
+            opportunities for your career this week" vs. "Aspire Weekly Digest
+            #47") consistently outperformed. Recommended a subject line
+            framework built around specificity and utility.
+          </div>
+        </div>
+        <div class="decision">
+          <div class="decision-label">Standardize send timing</div>
+          <div class="decision-text">
+            Inconsistent send days made it hard to build reader habit and
+            complicated performance analysis. A steady weekly cadence improves
+            open rates and the reliability of future A/B testing.
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="next-bar reveal">
+      <div>
+        <div class="next-label">Next Project</div>
+        <div class="next-title">Flowmersion, Technical PM, 0 to Live</div>
+      </div>
+      <a href="project-flowmersion.html" class="next-arrow">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path
+            d="M1 13L13 1M13 1H4M13 1v9"
+            stroke="currentColor"
+            stroke-width="1.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </a>
+    </div>
+
+    <script>
+      const io = new IntersectionObserver(
+        (e) => {
+          e.forEach((x) => {
+            if (x.isIntersecting) {
+              x.target.classList.add("in");
+              io.unobserve(x.target);
+            }
+          });
+        },
+        { threshold: 0.06, rootMargin: "0px 0px -24px 0px" },
+      );
+      document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+    </script>
+  </body>
+</html>
