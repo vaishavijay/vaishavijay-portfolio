@@ -1191,6 +1191,28 @@
         border-radius: 100px;
       }
 
+      .skill-group + .skill-group {
+        margin-top: 1.1rem;
+      }
+
+      .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2.5rem 3rem;
+      }
+
+      .skills-grid > .skill-group + .skill-group {
+        margin-top: 0;
+      }
+
+      .skills-grid .skill-g-label {
+        font-size: 0.7rem;
+      }
+
+      .skills-grid .skill-chip {
+        font-size: 0.82rem;
+      }
+
       .about-aside {
         display: flex;
         flex-direction: column;
@@ -1531,6 +1553,11 @@
           gap: 3rem;
         }
 
+        .skills-grid {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+
         .contact-inner {
           grid-template-columns: 1fr;
           gap: 3rem;
@@ -1829,27 +1856,9 @@
           </div>
 
           <div class="hero-role-row">
-            <span class="role-label">CS &amp; BA @ Northeastern</span>
-            <span class="role-divider"></span>
             <span class="role-current"
-              >Cloud &amp; Platform engineering | TPM | DevOps</span
+              >Cloud Infrastructure | Platform Engineering | DevOps</span
             >
-          </div>
-
-          <!-- <p class="hero-bio">
-            Builds and owns cloud infrastructure end to end: running
-            production AWS systems across a 20+ brand portfolio, building
-            data platforms from scratch, and leading technical programs
-            across cross-functional teams. Previously a developer at
-            Waterside Group.
-          </p> -->
-
-          <div class="hero-tags">
-            <span class="hero-tag">Technical Product Manager</span>
-            <span class="hero-tag">Cloud Engineer</span>
-            <span class="hero-tag">Software Engineer</span>
-            <span class="hero-tag">Platform Engineer</span>
-            <span class="hero-tag">DevOps Engineer</span>
           </div>
 
           <div class="hero-ctas">
@@ -1897,16 +1906,95 @@
               </div>
             </div> -->
           </div>
-          <div class="hero-skills">
-            <div class="skill-g-label">Core skills</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="section" style="background: var(--off)">
+      <div class="section-w">
+        <div class="s-label reveal">Core skills</div>
+        <div class="skills-grid reveal">
+          <div class="skill-group">
+            <div class="skill-g-label">Cloud &amp; Infrastructure</div>
             <div class="skill-chips">
-              <span class="skill-chip">AWS</span
+              <span class="skill-chip">AWS Lambda</span
+              ><span class="skill-chip">S3</span
+              ><span class="skill-chip">DynamoDB</span
+              ><span class="skill-chip">EventBridge</span
+              ><span class="skill-chip">API Gateway</span
+              ><span class="skill-chip">SES</span
+              ><span class="skill-chip">Secrets Manager</span
+              ><span class="skill-chip">CloudWatch</span
+              ><span class="skill-chip">Bedrock</span
+              ><span class="skill-chip">IAM</span
+              ><span class="skill-chip">CloudFormation</span
+              ><span class="skill-chip">EC2</span
+              ><span class="skill-chip">RDS</span
               ><span class="skill-chip">Serverless</span
-              ><span class="skill-chip">Event-driven</span
-              ><span class="skill-chip">Systems Design</span
-              ><span class="skill-chip">Incident Response</span
-              ><span class="skill-chip">DevOps</span
-              ><span class="skill-chip">Python</span>
+              ><span class="skill-chip">Docker</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <div class="skill-g-label">IaC, Observability &amp; Security</div>
+            <div class="skill-chips">
+              <span class="skill-chip">CloudFormation (IaC)</span
+              ><span class="skill-chip">CI/CD (GitHub Actions)</span
+              ><span class="skill-chip"
+                >CloudWatch Alarms &amp; Automated Alerting</span
+              ><span class="skill-chip">IAM Least-Privilege Access</span
+              ><span class="skill-chip">Secrets Management</span
+              ><span class="skill-chip">Incident Response</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <div class="skill-g-label">DevOps &amp; Integrations</div>
+            <div class="skill-chips">
+              <span class="skill-chip">REST APIs</span
+              ><span class="skill-chip">Webhooks</span
+              ><span class="skill-chip">Polling Architecture</span
+              ><span class="skill-chip"
+                >CRM Integrations (HubSpot, Salesforce)</span
+              >
+            </div>
+          </div>
+          <div class="skill-group">
+            <div class="skill-g-label">Program Management</div>
+            <div class="skill-chips">
+              <span class="skill-chip">Agile/Scrum</span
+              ><span class="skill-chip">Sprint Planning</span
+              ><span class="skill-chip">Roadmap Execution</span
+              ><span class="skill-chip">Risk Mitigation</span
+              ><span class="skill-chip">Dependency Tracking</span
+              ><span class="skill-chip">Cross-Functional Alignment</span
+              ><span class="skill-chip">Requirements Gathering</span
+              ><span class="skill-chip">Stakeholder Communication</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <div class="skill-g-label">Languages &amp; Data</div>
+            <div class="skill-chips">
+              <span class="skill-chip">Python</span
+              ><span class="skill-chip">SQL</span
+              ><span class="skill-chip">JavaScript</span
+              ><span class="skill-chip">Java</span
+              ><span class="skill-chip">HTML/CSS</span
+              ><span class="skill-chip">Pandas</span
+              ><span class="skill-chip">Tableau</span
+              ><span class="skill-chip">Excel</span
+              ><span class="skill-chip">Airtable</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <div class="skill-g-label">Tools</div>
+            <div class="skill-chips">
+              <span class="skill-chip">Git</span
+              ><span class="skill-chip">GitHub</span
+              ><span class="skill-chip">GitHub Actions</span
+              ><span class="skill-chip">VS Code</span
+              ><span class="skill-chip">Figma</span
+              ><span class="skill-chip">Google Tag Manager</span
+              ><span class="skill-chip">Meta Ads Manager</span>
             </div>
           </div>
         </div>
