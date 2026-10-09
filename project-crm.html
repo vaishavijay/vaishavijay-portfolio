@@ -800,7 +800,7 @@
               fill="#B85200"
               font-family="'DM Mono',monospace"
             >
-              API Gateway · oo822zhp14
+              API Gateway (REST)
             </text>
             <text
               x="375"
@@ -1079,7 +1079,7 @@
               text-anchor="middle"
               font-family="'DM Mono',monospace"
             >
-              one portal · 44586838 · 20+ brands
+              one portal · 20+ brands
             </text>
 
             <!-- S3 -->
@@ -1167,9 +1167,8 @@
           <div class="decision-label">Scheduled · EventBridge + DynamoDB</div>
           <div class="decision-text">
             Molo has no public API, so its sync is pull-based.
-            <code>EventBridge</code> triggers the
-            <code>flyingbridge-molo-hubspot-sync</code> Lambda every 12 hours.
-            The Lambda pulls contacts and vessels for three marinas, compares
+            <code>EventBridge</code> triggers the Molo sync Lambda every 12
+            hours. The Lambda pulls contacts and vessels for three marinas, compares
             each record against state in <code>DynamoDB</code>, and pushes only
             what changed. The two Tripleseat lead syncs, for Harbor Lights and
             Basecamp, use the same scheduled pattern on a 5-minute poll.
@@ -1182,11 +1181,10 @@
             Tripleseat and D-Tools both emit webhooks, so those syncs are
             event-driven and near real time. The source system posts to
             <code>API Gateway</code>, which proxies the raw event to a Lambda:
-            <code>harborlights-tripleseat-deal-sync</code> turns Tripleseat
-            bookings into HubSpot deals, and
-            <code>vineyard-dtools-hubspot-sync</code> turns D-Tools clients into
-            HubSpot contacts. The Lambda fetches the full record, then creates
-            or updates in HubSpot.
+            the Tripleseat deal-sync Lambda turns Tripleseat bookings into
+            HubSpot deals, and the D-Tools sync Lambda turns D-Tools clients
+            into HubSpot contacts. The Lambda fetches the full record, then
+            creates or updates in HubSpot.
           </div>
         </div>
 
@@ -1392,9 +1390,8 @@
         <div class="cs-sec-label">Infrastructure Hygiene</div>
         <h2 class="cs-h2">Neutralized the legacy stack before scaling.</h2>
         <p class="cs-p">
-          A previous vendor had left two legacy Tripleseat sync Lambdas,
-          <code>tripleseat-prod-tripleseatWebhook</code> and
-          <code>tripleseat-prod-queueWorker</code>, running in the account. Once
+          A previous vendor had left two legacy Tripleseat sync Lambdas — a
+          webhook handler and a queue worker — running in the account. Once
           my replacement was confirmed working, I disabled both by setting
           Reserved Concurrency to 0 rather than deleting them, so they stopped
           executing but stayed recoverable pending owner sign-off.
@@ -1407,6 +1404,45 @@
           <code>waterside/*</code> prefix), credentials move toward
           <code>Secrets Manager</code>, and every function logs to
           <code>CloudWatch</code> for debugging.
+        </p>
+      </div>
+
+      <div class="cs-hr"></div>
+
+      <div class="cs-sec reveal">
+        <div class="cs-sec-label">Deploy &amp; Operations</div>
+        <h2 class="cs-h2">How it's deployed, and what's still manual.</h2>
+        <p class="cs-p">
+          Each integration is a versioned Lambda deployed from a
+          single-purpose codebase, with configuration in environment
+          variables and credentials in Secrets Manager. Deploys were manual
+          through the console during the co-op — moving the stack to
+          infrastructure-as-code is the next thing I'd build, and the
+          incident below is the reason why.
+        </p>
+        <p class="cs-p">
+          The account had no non-production environment when I inherited it.
+          That cost me: an early Molo test run overwrote fields on 7 live
+          contacts, which I restored by hand from HubSpot's property history.
+          The three-tier merge logic described above exists because of that
+          incident. The more complete fix would have been a staging portal to
+          test against, not just better merge rules — that's what I'd add
+          first if I rebuilt this.
+        </p>
+        <p class="cs-p">
+          Detection is log-based, not alarm-based: every function logs to
+          CloudWatch, and I read those logs to confirm each sync ran clean.
+          There's no alarm today that would catch a silent stall in the
+          12-hour Molo sync or the 5-minute Tripleseat poll. Alarms on
+          invocation count, error rate, and sync-record delta, wired to a
+          notification target, are what I'd add next.
+        </p>
+        <p class="cs-p">
+          Reversibility is handled deliberately in two places instead: the
+          dedup engine defaults to a dry-run gate because merges are
+          irreversible, and the legacy vendor Lambdas were disabled via
+          reserved concurrency 0 rather than deletion, so they stayed
+          recoverable pending sign-off.
         </p>
       </div>
 
